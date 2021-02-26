@@ -4,11 +4,7 @@ CONJ: conjunto2 -> A~Z;
 CONJ: conjunto3 -> 0~9;
 CONJ: conjunto4 -> A,b,C,D;
 CONJ: conjunto4 -> 1,2,3,4;
-
 %%
 %%
-
-lexema1: " 34 ";
-lexema2: " s34 ";
-lexema3: " 2avSD ";
+lexema1: "simon";
 }

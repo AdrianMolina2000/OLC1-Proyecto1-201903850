@@ -35,14 +35,14 @@ public class Sintactico extends java_cup.runtime.lr_parser {
     "\004\000\002\002\003\000\002\003\006\000\002\003\005" +
     "\000\002\004\004\000\002\004\003\000\002\014\002\000" +
     "\002\006\011\000\002\015\002\000\002\006\010\000\002" +
-    "\005\004\000\002\005\003\000\002\007\005\000\002\007" +
-    "\005\000\002\007\005\000\002\016\002\000\002\007\006" +
-    "\000\002\017\002\000\002\007\006\000\002\020\002\000" +
-    "\002\007\006\000\002\010\002\000\002\021\002\000\002" +
-    "\010\006\000\002\022\002\000\002\010\006\000\002\010" +
-    "\003\000\002\010\003\000\002\011\002\000\002\023\002" +
-    "\000\002\011\006\000\002\011\003\000\002\024\002\000" +
-    "\002\025\002\000\002\013\012" });
+    "\007\005\000\002\007\005\000\002\007\005\000\002\016" +
+    "\002\000\002\007\006\000\002\017\002\000\002\007\006" +
+    "\000\002\020\002\000\002\007\006\000\002\010\002\000" +
+    "\002\021\002\000\002\010\006\000\002\022\002\000\002" +
+    "\010\006\000\002\010\003\000\002\010\003\000\002\011" +
+    "\002\000\002\023\002\000\002\011\006\000\002\011\003" +
+    "\000\002\005\004\000\002\005\003\000\002\024\002\000" +
+    "\002\025\002\000\002\013\010" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -50,43 +50,42 @@ public class Sintactico extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\101\000\006\003\006\011\007\001\002\000\004\002" +
-    "\000\001\002\000\004\002\103\001\002\000\006\002\ufffe" +
+    "\000\077\000\006\003\006\011\007\001\002\000\004\002" +
+    "\000\001\002\000\004\002\101\001\002\000\006\002\ufffe" +
     "\011\007\001\002\000\006\016\011\026\013\001\002\000" +
-    "\010\012\077\016\011\026\013\001\002\000\004\016\060" +
+    "\010\012\075\016\011\026\013\001\002\000\004\016\060" +
     "\001\002\000\010\012\ufffa\016\ufffa\026\ufffa\001\002\000" +
     "\004\004\014\001\002\000\004\024\015\001\002\000\004" +
     "\005\ufff9\001\002\000\004\005\017\001\002\000\010\017" +
     "\023\020\021\021\022\001\002\000\004\007\057\001\002" +
-    "\000\006\006\053\010\ufff0\001\002\000\006\006\036\010" +
-    "\uffee\001\002\000\006\006\024\010\uffec\001\002\000\004" +
+    "\000\006\006\053\010\ufff2\001\002\000\006\006\036\010" +
+    "\ufff0\001\002\000\006\006\024\010\uffee\001\002\000\004" +
     "\017\034\001\002\000\004\010\026\001\002\000\006\007" +
-    "\uffe3\017\030\001\002\000\004\007\uffeb\001\002\000\006" +
-    "\007\uffe0\010\uffe2\001\002\000\004\010\032\001\002\000" +
-    "\006\007\uffe3\017\030\001\002\000\004\007\uffe1\001\002" +
-    "\000\004\007\ufff1\001\002\000\004\010\040\001\002\000" +
-    "\004\021\037\001\002\000\004\007\ufff2\001\002\000\010" +
-    "\007\uffea\020\041\021\042\001\002\000\006\007\uffe5\010" +
-    "\uffe9\001\002\000\006\007\uffe4\010\uffe7\001\002\000\004" +
-    "\007\uffed\001\002\000\004\010\045\001\002\000\010\007" +
-    "\uffea\020\041\021\042\001\002\000\004\007\uffe6\001\002" +
-    "\000\004\010\050\001\002\000\010\007\uffea\020\041\021" +
-    "\042\001\002\000\004\007\uffe8\001\002\000\004\010\055" +
-    "\001\002\000\004\020\054\001\002\000\004\007\ufff3\001" +
-    "\002\000\010\007\uffea\020\041\021\042\001\002\000\004" +
-    "\007\uffef\001\002\000\010\012\ufff8\016\ufff8\026\ufff8\001" +
+    "\uffe5\017\030\001\002\000\004\007\uffed\001\002\000\006" +
+    "\007\uffe2\010\uffe4\001\002\000\004\010\032\001\002\000" +
+    "\006\007\uffe5\017\030\001\002\000\004\007\uffe3\001\002" +
+    "\000\004\007\ufff3\001\002\000\004\010\040\001\002\000" +
+    "\004\021\037\001\002\000\004\007\ufff4\001\002\000\010" +
+    "\007\uffec\020\041\021\042\001\002\000\006\007\uffe7\010" +
+    "\uffeb\001\002\000\006\007\uffe6\010\uffe9\001\002\000\004" +
+    "\007\uffef\001\002\000\004\010\045\001\002\000\010\007" +
+    "\uffec\020\041\021\042\001\002\000\004\007\uffe8\001\002" +
+    "\000\004\010\050\001\002\000\010\007\uffec\020\041\021" +
+    "\042\001\002\000\004\007\uffea\001\002\000\004\010\055" +
+    "\001\002\000\004\020\054\001\002\000\004\007\ufff5\001" +
+    "\002\000\010\007\uffec\020\041\021\042\001\002\000\004" +
+    "\007\ufff1\001\002\000\010\012\ufff8\016\ufff8\026\ufff8\001" +
     "\002\000\004\016\061\001\002\000\004\016\062\001\002" +
     "\000\004\024\ufff7\001\002\000\004\024\066\001\002\000" +
-    "\012\012\ufff6\016\ufff6\024\066\026\ufff6\001\002\000\012" +
-    "\012\ufff4\016\ufff4\024\ufff4\026\ufff4\001\002\000\004\004" +
-    "\uffdf\001\002\000\004\004\070\001\002\000\004\025\071" +
-    "\001\002\000\004\023\072\001\002\000\004\025\uffde\001" +
-    "\002\000\004\025\074\001\002\000\004\007\075\001\002" +
-    "\000\012\012\uffdd\016\uffdd\024\uffdd\026\uffdd\001\002\000" +
-    "\012\012\ufff5\016\ufff5\024\ufff5\026\ufff5\001\002\000\006" +
-    "\002\ufffc\011\007\001\002\000\010\012\ufffb\016\ufffb\026" +
-    "\ufffb\001\002\000\004\002\ufffd\001\002\000\004\002\uffff" +
-    "\001\002\000\004\002\001\001\002" });
+    "\012\012\uffe0\016\uffe0\024\uffe0\026\uffe0\001\002\000\012" +
+    "\012\ufff6\016\ufff6\024\066\026\ufff6\001\002\000\004\004" +
+    "\uffdf\001\002\000\004\004\070\001\002\000\004\023\071" +
+    "\001\002\000\004\007\uffde\001\002\000\004\007\073\001" +
+    "\002\000\012\012\uffdd\016\uffdd\024\uffdd\026\uffdd\001\002" +
+    "\000\012\012\uffe1\016\uffe1\024\uffe1\026\uffe1\001\002\000" +
+    "\006\002\ufffc\011\007\001\002\000\010\012\ufffb\016\ufffb" +
+    "\026\ufffb\001\002\000\004\002\ufffd\001\002\000\004\002" +
+    "\uffff\001\002\000\004\002\001\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -94,9 +93,9 @@ public class Sintactico extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\101\000\006\002\004\003\003\001\001\000\002\001" +
-    "\001\000\002\001\001\000\004\003\101\001\001\000\006" +
-    "\004\007\006\011\001\001\000\004\006\077\001\001\000" +
+    "\000\077\000\006\002\004\003\003\001\001\000\002\001" +
+    "\001\000\002\001\001\000\004\003\077\001\001\000\006" +
+    "\004\007\006\011\001\001\000\004\006\075\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\004\014\015\001\001\000\002\001\001\000" +
     "\004\007\017\001\001\000\002\001\001\000\004\016\051" +
@@ -112,13 +111,12 @@ public class Sintactico extends java_cup.runtime.lr_parser {
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\004\010\055\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\004\015\062" +
-    "\001\001\000\006\005\063\013\064\001\001\000\004\013" +
-    "\075\001\001\000\002\001\001\000\004\024\066\001\001" +
-    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\004\025\072\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\004\003\100\001" +
+    "\001\001\000\006\005\064\013\063\001\001\000\002\001" +
+    "\001\000\004\013\073\001\001\000\004\024\066\001\001" +
+    "\000\002\001\001\000\002\001\001\000\004\025\071\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001" });
+    "\000\004\003\076\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -324,25 +322,7 @@ System.out.println("Corte de linea");
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 12: // listaLexemas ::= listaLexemas lexemas 
-            {
-              Object RESULT =null;
-
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("listaLexemas",3, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
-            }
-          return CUP$Sintactico$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 13: // listaLexemas ::= lexemas 
-            {
-              Object RESULT =null;
-
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("listaLexemas",3, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
-            }
-          return CUP$Sintactico$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 14: // conjuntos ::= LOWER RANGO LOWER 
+          case 12: // conjuntos ::= LOWER RANGO LOWER 
             {
               Object RESULT =null;
 		int bleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
@@ -357,7 +337,7 @@ System.out.println("Corte de linea");
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 15: // conjuntos ::= UPPER RANGO UPPER 
+          case 13: // conjuntos ::= UPPER RANGO UPPER 
             {
               Object RESULT =null;
 		int bleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
@@ -372,7 +352,7 @@ System.out.println("Corte de linea");
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 16: // conjuntos ::= ENTERO RANGO ENTERO 
+          case 14: // conjuntos ::= ENTERO RANGO ENTERO 
             {
               Object RESULT =null;
 		int bleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
@@ -387,7 +367,7 @@ System.out.println("Corte de linea");
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 17: // NT$2 ::= 
+          case 15: // NT$2 ::= 
             {
               Object RESULT =null;
 		int bleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
@@ -399,7 +379,7 @@ System.out.print("lista: "+b);
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 18: // conjuntos ::= LOWER NT$2 COMA listaL 
+          case 16: // conjuntos ::= LOWER NT$2 COMA listaL 
             {
               Object RESULT =null;
               // propagate RESULT from NT$2
@@ -413,7 +393,7 @@ System.out.print("lista: "+b);
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 19: // NT$3 ::= 
+          case 17: // NT$3 ::= 
             {
               Object RESULT =null;
 		int bleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
@@ -425,7 +405,7 @@ System.out.print("lista: "+b);
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 20: // conjuntos ::= UPPER NT$3 COMA listaL 
+          case 18: // conjuntos ::= UPPER NT$3 COMA listaL 
             {
               Object RESULT =null;
               // propagate RESULT from NT$3
@@ -439,7 +419,7 @@ System.out.print("lista: "+b);
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 21: // NT$4 ::= 
+          case 19: // NT$4 ::= 
             {
               Object RESULT =null;
 		int bleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
@@ -451,7 +431,7 @@ System.out.print("lista: "+b);
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 22: // conjuntos ::= ENTERO NT$4 COMA listaN 
+          case 20: // conjuntos ::= ENTERO NT$4 COMA listaN 
             {
               Object RESULT =null;
               // propagate RESULT from NT$4
@@ -465,7 +445,7 @@ System.out.print("lista: "+b);
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 23: // listaL ::= 
+          case 21: // listaL ::= 
             {
               Object RESULT =null;
 
@@ -474,7 +454,7 @@ System.out.print("lista: "+b);
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 24: // NT$5 ::= 
+          case 22: // NT$5 ::= 
             {
               Object RESULT =null;
 		int dleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
@@ -486,7 +466,7 @@ System.out.print(", "+d);
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 25: // listaL ::= LOWER NT$5 COMA listaL 
+          case 23: // listaL ::= LOWER NT$5 COMA listaL 
             {
               Object RESULT =null;
               // propagate RESULT from NT$5
@@ -500,7 +480,7 @@ System.out.print(", "+d);
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 26: // NT$6 ::= 
+          case 24: // NT$6 ::= 
             {
               Object RESULT =null;
 		int dleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
@@ -512,7 +492,7 @@ System.out.print(", "+d);
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 27: // listaL ::= UPPER NT$6 COMA listaL 
+          case 25: // listaL ::= UPPER NT$6 COMA listaL 
             {
               Object RESULT =null;
               // propagate RESULT from NT$6
@@ -526,7 +506,7 @@ System.out.print(", "+d);
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 28: // listaL ::= LOWER 
+          case 26: // listaL ::= LOWER 
             {
               Object RESULT =null;
 		int dleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
@@ -538,7 +518,7 @@ System.out.print(", "+d);
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 29: // listaL ::= UPPER 
+          case 27: // listaL ::= UPPER 
             {
               Object RESULT =null;
 		int dleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
@@ -550,7 +530,7 @@ System.out.print(", "+d);
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 30: // listaN ::= 
+          case 28: // listaN ::= 
             {
               Object RESULT =null;
 
@@ -559,7 +539,7 @@ System.out.print(", "+d);
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 31: // NT$7 ::= 
+          case 29: // NT$7 ::= 
             {
               Object RESULT =null;
 		int dleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
@@ -571,7 +551,7 @@ System.out.print(", "+d);
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 32: // listaN ::= ENTERO NT$7 COMA listaN 
+          case 30: // listaN ::= ENTERO NT$7 COMA listaN 
             {
               Object RESULT =null;
               // propagate RESULT from NT$7
@@ -585,7 +565,7 @@ System.out.print(", "+d);
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 33: // listaN ::= ENTERO 
+          case 31: // listaN ::= ENTERO 
             {
               Object RESULT =null;
 		int dleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
@@ -593,6 +573,24 @@ System.out.print(", "+d);
 		String d = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
 		System.out.println(", "+d);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("listaN",7, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 32: // listaLexemas ::= listaLexemas lexemas 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("listaLexemas",3, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 33: // listaLexemas ::= lexemas 
+            {
+              Object RESULT =null;
+
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("listaLexemas",3, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
 
@@ -611,32 +609,32 @@ System.out.print(a + ": ");
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 35: // NT$9 ::= 
             {
-              Object RESULT =(Object) ((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
-		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).left;
-		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).right;
-		String a = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).value;
+              Object RESULT =(Object) ((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
 		int bleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
 		String b = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
-System.out.println(b);
+System.out.print(b);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("NT$9",19, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 36: // lexemas ::= IDENTIFICADOR NT$8 DPUNTO COMILLADOBLE LEXEM NT$9 COMILLADOBLE PTCOMA 
+          case 36: // lexemas ::= IDENTIFICADOR NT$8 DPUNTO LEXEM NT$9 PTCOMA 
             {
               Object RESULT =null;
               // propagate RESULT from NT$9
-                RESULT = (Object) ((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
-		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-7)).left;
-		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-7)).right;
-		String a = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-7)).value;
-		int bleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
-		int bright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
-		String b = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+                RESULT = (Object) ((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)).value;
+		int bleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
+		String b = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("lexemas",9, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-7)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("lexemas",9, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
 

@@ -26,16 +26,18 @@ letMin=[a-z]
 letMay=[A-Z]
 LetMM=[A-Za-z]
 ID=[A-Za-z]+[_0-9A-Za-z]*
-ID2 = [A-Za-z0-9]+
-COMENTARIOML = (<!(\n|.*)*!>)
+
+lex = \"([^\"])+\"
+COMENTARIOML = \<\!([^!\>]|[^!]\>|\![^\>])*\!\>
 COMENTARIO = (\/\/.*)
-CD = \"
+CD = [\"]
 PER = %
 
 %%
-{VACIO} {} 
+
 {COMENTARIOML} {}
 {COMENTARIO} {}
+{VACIO} {} 
 
 "CONJ" {return new Symbol(sym.CONJUNTO,yyline,yychar,
                              yytext());} 
@@ -60,11 +62,11 @@ PER = %
 {letMay} {return new Symbol(sym.UPPER,yyline,yychar, yytext());} 
 {LetMM} {return new Symbol(sym.LOPPER,yyline,yychar, yytext());}
 {ID} {return new Symbol(sym.IDENTIFICADOR,yyline,yychar, yytext());}
-{ID2} {return new Symbol(sym.LEXEM,yyline,yychar, yytext());}
+{lex} {return new Symbol(sym.LEXEM,yyline,yychar, yytext());}
 {CD} {return new Symbol(sym.COMILLADOBLE,yyline,yychar, yytext());}
 {PER} {return new Symbol(sym.SEPARADOR,yyline,yychar, yytext());}
 
 . {
     System.out.println("Este es un error lexico: "+yytext()+
     ", en la linea: "+yyline+", en la columna: "+yychar);
-}
+}           

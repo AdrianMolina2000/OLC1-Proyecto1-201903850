@@ -61,11 +61,6 @@ instruccion::=
    |SEPARADOR SEPARADOR SEPARADOR SEPARADOR {:System.out.println("Corte de linea");:} listaLexemas
 ;
 
-listaLexemas::=
-    listaLexemas lexemas
-   |lexemas
-;
-
 conjuntos::=
     LOWER:b RANGO LOWER:c {:System.out.println("rango: "+b+"~"+c);:}
    |UPPER:b RANGO UPPER:c {:System.out.println("rango: "+b+"~"+c);:}
@@ -87,8 +82,13 @@ listaN::=
    |ENTERO:d {:System.out.println(", "+d);:}
 ;
 
+listaLexemas::=
+    listaLexemas lexemas
+   |lexemas
+;
+
 lexemas::=
-   IDENTIFICADOR:a {:System.out.print(a + ": ");:} DPUNTO COMILLADOBLE LEXEM:b {:System.out.println(b);:} COMILLADOBLE PTCOMA
+   IDENTIFICADOR:a {:System.out.print(a + ": ");:} DPUNTO LEXEM:b {:System.out.print(b);:} PTCOMA
 ;
 
 
