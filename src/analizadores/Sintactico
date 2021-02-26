@@ -1,0 +1,96 @@
+/*
+ * Analizador Sintactico
+ * Adrian Samuel Molina Cabrera
+ * 201930850
+ */
+
+package analizadores; 
+import java_cup.runtime.*;
+
+parser code 
+{:
+    /**
+     * Método al que se llama automáticamente ante algún error sintactico.
+     **/ 
+    public void syntax_error(Symbol s){ 
+        System.out.println("Error Sintáctico en la Línea " + (s.left) +
+        " Columna "+s.right+ ". No se esperaba este componente: " +s.value+"."); 
+    } 
+
+    /**
+     * Método al que se llama automáticamente ante algún error sintáctico 
+     * en el que ya no es posible una recuperación de errores.
+     **/ 
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
+        System.out.println("Error síntactico irrecuperable en la Línea " + 
+        (s.left)+ " Columna "+s.right+". Componente " + s.value + 
+        " no reconocido."); 
+    }  
+:} 
+
+terminal String DPUNTO, ASIGNAR, RANGO, PTCOMA, COMA, LLAIZQ, LLADER;
+terminal String CONCAT, CEROMAS, DISYUNCION, SEPARADOR;
+terminal String ENTERO, LOWER, UPPER, LOPPER, LEXEM,IDENTIFICADOR, COMILLADOBLE;
+terminal String CONJUNTO;
+
+non terminal ini;
+non terminal instrucciones, listaInstrucciones, listaLexemas, instruccion;
+non terminal conjuntos, listaL, listaN, expresiones, lexemas;
+
+precedence left LLAIZQ, LLADER,CEROMAS, CONCAT, DISYUNCION;
+
+start with ini; 
+ini::=
+     instrucciones
+    |error instrucciones
+    |error
+;
+  
+instrucciones ::=
+    LLAIZQ listaInstrucciones LLADER instrucciones
+   |LLAIZQ listaInstrucciones LLADER 
+;
+
+listaInstrucciones::=
+    listaInstrucciones instruccion
+   |instruccion
+;
+
+instruccion::=
+    CONJUNTO DPUNTO IDENTIFICADOR:a {:System.out.print(a + " -> ");:} ASIGNAR conjuntos PTCOMA
+   |SEPARADOR SEPARADOR SEPARADOR SEPARADOR {:System.out.println("Corte de linea");:} listaLexemas
+;
+
+listaLexemas::=
+    listaLexemas lexemas
+   |lexemas
+;
+
+conjuntos::=
+    LOWER:b RANGO LOWER:c {:System.out.println("rango: "+b+"~"+c);:}
+   |UPPER:b RANGO UPPER:c {:System.out.println("rango: "+b+"~"+c);:}
+   |ENTERO:b RANGO ENTERO:c {:System.out.println("rango: "+b+"~"+c);:}
+   |LOWER:b {:System.out.print("lista: "+b);:} COMA listaL 
+   |UPPER:b {:System.out.print("lista: "+b);:} COMA listaL 
+   |ENTERO:b {:System.out.print("lista: "+b);:} COMA listaN 
+;
+
+listaL::=
+   |LOWER:d {:System.out.print(", "+d);:} COMA listaL
+   |UPPER:d {:System.out.print(", "+d);:} COMA listaL
+   |LOWER:d {:System.out.println(", "+d);:}
+   |UPPER:d {:System.out.println(", "+d);:}
+;
+
+listaN::=
+   |ENTERO:d {:System.out.print(", "+d);:} COMA listaN
+   |ENTERO:d {:System.out.println(", "+d);:}
+;
+
+lexemas::=
+   IDENTIFICADOR:a {:System.out.print(a + ": ");:} DPUNTO COMILLADOBLE LEXEM:b {:System.out.println(b);:} COMILLADOBLE PTCOMA
+;
+
+
+
+

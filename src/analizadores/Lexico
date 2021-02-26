@@ -1,0 +1,70 @@
+/*
+ * Analizador Lexico
+ * Adrian Samuel Molina Cabrera
+ * 201930850
+ */
+
+package analizadores;
+import java_cup.runtime.Symbol; 
+
+%% 
+%class Lexico
+%public 
+%line 
+%char 
+%cup 
+%unicode
+
+%init{ 
+    yyline = 1; 
+    yychar = 1; 
+%init} 
+
+VACIO=[ \r\t]+
+D=[0-9]
+letMin=[a-z]
+letMay=[A-Z]
+LetMM=[A-Za-z]
+ID=[A-Za-z]+[_0-9A-Za-z]*
+ID2 = [A-Za-z0-9]+
+COMENTARIOML = (<!(\n|.*)*!>)
+COMENTARIO = (\/\/.*)
+CD = \"
+PER = %
+
+%%
+{VACIO} {} 
+{COMENTARIOML} {}
+{COMENTARIO} {}
+
+"CONJ" {return new Symbol(sym.CONJUNTO,yyline,yychar,
+                             yytext());} 
+
+":" {return new Symbol(sym.DPUNTO,yyline,yychar, yytext());}
+"->" {return new Symbol(sym.ASIGNAR,yyline,yychar, yytext());}
+"~" {return new Symbol(sym.RANGO,yyline,yychar, yytext());}
+";" {return new Symbol(sym.PTCOMA,yyline,yychar, yytext());}
+"," {return new Symbol(sym.COMA,yyline,yychar, yytext());}
+"{" {return new Symbol(sym.LLAIZQ,yyline,yychar, yytext());} 
+"}" {return new Symbol(sym.LLADER,yyline,yychar, yytext());} 
+
+"." {return new Symbol(sym.CONCAT,yyline,yychar, yytext());} 
+"*" {return new Symbol(sym.CEROMAS,yyline,yychar, yytext());} 
+"|" {return new Symbol(sym.DISYUNCION,yyline,yychar, yytext());} 
+
+\n {yychar=1;}
+
+
+{D} {return new Symbol(sym.ENTERO,yyline,yychar, yytext());} 
+{letMin} {return new Symbol(sym.LOWER,yyline,yychar, yytext());} 
+{letMay} {return new Symbol(sym.UPPER,yyline,yychar, yytext());} 
+{LetMM} {return new Symbol(sym.LOPPER,yyline,yychar, yytext());}
+{ID} {return new Symbol(sym.IDENTIFICADOR,yyline,yychar, yytext());}
+{ID2} {return new Symbol(sym.LEXEM,yyline,yychar, yytext());}
+{CD} {return new Symbol(sym.COMILLADOBLE,yyline,yychar, yytext());}
+{PER} {return new Symbol(sym.SEPARADOR,yyline,yychar, yytext());}
+
+. {
+    System.out.println("Este es un error lexico: "+yytext()+
+    ", en la linea: "+yyline+", en la columna: "+yychar);
+}
