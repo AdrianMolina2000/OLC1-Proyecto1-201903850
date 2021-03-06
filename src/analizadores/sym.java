@@ -10,23 +10,27 @@ public class sym {
   /* terminals */
   public static final int LLAIZQ = 7;
   public static final int LLADER = 8;
-  public static final int CONJUNTO = 20;
+  public static final int CONJUNTO = 24;
+  public static final int UNOMAS = 11;
+  public static final int ALFA = 21;
+  public static final int CERUNO = 12;
   public static final int CONCAT = 9;
-  public static final int UPPER = 15;
+  public static final int UPPER = 17;
+  public static final int CARACTER = 22;
   public static final int ASIGNAR = 3;
-  public static final int SEPARADOR = 12;
+  public static final int SEPARADOR = 14;
   public static final int COMA = 6;
-  public static final int LOWER = 14;
+  public static final int LOWER = 16;
   public static final int EOF = 0;
-  public static final int DISYUNCION = 11;
-  public static final int COMILLADOBLE = 19;
-  public static final int LEXEM = 17;
+  public static final int DISYUNCION = 13;
+  public static final int COMILLADOBLE = 23;
+  public static final int LEXEM = 19;
   public static final int error = 1;
-  public static final int IDENTIFICADOR = 18;
+  public static final int IDENTIFICADOR = 20;
   public static final int DPUNTO = 2;
   public static final int CEROMAS = 10;
-  public static final int LOPPER = 16;
-  public static final int ENTERO = 13;
+  public static final int LOPPER = 18;
+  public static final int ENTERO = 15;
   public static final int RANGO = 4;
   public static final int PTCOMA = 5;
   public static final String[] terminalNames = new String[] {
@@ -41,6 +45,8 @@ public class sym {
   "LLADER",
   "CONCAT",
   "CEROMAS",
+  "UNOMAS",
+  "CERUNO",
   "DISYUNCION",
   "SEPARADOR",
   "ENTERO",
@@ -49,6 +55,8 @@ public class sym {
   "LOPPER",
   "LEXEM",
   "IDENTIFICADOR",
+  "ALFA",
+  "CARACTER",
   "COMILLADOBLE",
   "CONJUNTO"
   };

@@ -29,15 +29,15 @@ parser code
 :} 
 
 terminal String DPUNTO, ASIGNAR, RANGO, PTCOMA, COMA, LLAIZQ, LLADER;
-terminal String CONCAT, CEROMAS, DISYUNCION, SEPARADOR;
-terminal String ENTERO, LOWER, UPPER, LOPPER, LEXEM,IDENTIFICADOR, COMILLADOBLE;
+terminal String CONCAT, CEROMAS, UNOMAS, CERUNO, DISYUNCION, SEPARADOR;
+terminal String ENTERO, LOWER, UPPER, LOPPER, LEXEM,IDENTIFICADOR, ALFA, COMILLADOBLE;
 terminal String CONJUNTO;
 
 non terminal ini;
-non terminal instrucciones, instruccion;
-non terminal conjuntos, listaL, listaN, expresiones, lexemas;
+non terminal instrucciones, listaInstrucciones, listaLexemas, instruccion;
+non terminal conjuntos, listaL, listaN, expresiones, expresionesAux, lexemas;
 
-precedence left LLAIZQ, LLADER,CEROMAS, CONCAT, DISYUNCION;
+precedence left LLAIZQ, LLADER,CEROMAS, IDENTIFICADOR;
 
 start with ini; 
 ini::=
@@ -47,13 +47,71 @@ ini::=
 ;
   
 instrucciones ::=
-    LLAIZQ instruccion LLADER instrucciones
-   |LLAIZQ instruccion LLADER
+    LLAIZQ listaInstrucciones LLADER instrucciones
+   |LLAIZQ listaInstrucciones LLADER 
 ;
 
-instruccion ::=
-   |CONJUNTO DPUNTO IDENTIFICADOR:a {:System.out.print("nombre del conjunto: "+a);:} ASIGNAR conjuntos:b PTCOMA
-   |IDENTIFICADOR:a {:System.out.print("nombre de la expresion: "+a);:} ASIGNAR expresiones:b PTCOMA
-   |IDENTIFICADOR:a {:System.out.print("nombre de la expresion: "+a);:} ASIGNAR expresiones:b PTCOMA instruccion
-   |SEPARADOR lexemas
+listaInstrucciones::=
+    listaInstrucciones instruccion
+   |instruccion
 ;
+
+instruccion::=
+    CONJUNTO DPUNTO IDENTIFICADOR:a {:System.out.print(a + " -> ");:} ASIGNAR conjuntos PTCOMA
+   |IDENTIFICADOR:a {:System.out.print(a + " -> ");:} ASIGNAR expresiones PTCOMA 
+   |SEPARADOR SEPARADOR SEPARADOR SEPARADOR {:System.out.println("Corte de linea");:} listaLexemas
+   
+;
+
+conjuntos::=
+    LOWER:b RANGO LOWER:c {:System.out.println("rango: "+b+"~"+c);:}
+   |UPPER:b RANGO UPPER:c {:System.out.println("rango: "+b+"~"+c);:}
+   |ENTERO:b RANGO ENTERO:c {:System.out.println("rango: "+b+"~"+c);:}
+   |LOWER:b {:System.out.print("lista: "+b);:} COMA listaL 
+   |UPPER:b {:System.out.print("lista: "+b);:} COMA listaL 
+   |ENTERO:b {:System.out.print("lista: "+b);:} COMA listaN 
+;
+
+listaL::=
+   |LOWER:d {:System.out.print(", "+d);:} COMA listaL
+   |UPPER:d {:System.out.print(", "+d);:} COMA listaL
+   |LOWER:d {:System.out.println(", "+d);:}
+   |UPPER:d {:System.out.println(", "+d);:}
+;
+
+listaN::=
+   |ENTERO:d {:System.out.print(", "+d);:} COMA listaN
+   |ENTERO:d {:System.out.println(", "+d);:}
+;
+
+expresiones::=
+    CEROMAS ALFA
+   |CEROMAS expresionesAux
+   |CONCAT ALFA expresiones
+   |CONCAT expresiones IDENTIFICADOR
+   |CONCAT ALFA ALFA
+   |CONCAT expresiones expresiones
+   |DISYUNCION ALFA ALFA
+   |DISYUNCION ALFA expresiones
+   |DISYUNCION expresiones ALFA
+   |DISYUNCION expresiones expresiones
+   |UNOMAS ALFA 
+   |UNOMAS expresionesAux
+   |
+;
+
+expresionesAux::=
+    
+;
+listaLexemas::=
+    listaLexemas lexemas
+   |lexemas
+;
+
+lexemas::=
+   IDENTIFICADOR:a {:System.out.print(a + ": ");:} DPUNTO LEXEM:b {:System.out.println(b);:} PTCOMA
+;
+
+
+
+

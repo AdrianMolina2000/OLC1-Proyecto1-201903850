@@ -29,15 +29,15 @@ parser code
 :} 
 
 terminal String DPUNTO, ASIGNAR, RANGO, PTCOMA, COMA, LLAIZQ, LLADER;
-terminal String CONCAT, CEROMAS, DISYUNCION, SEPARADOR;
-terminal String ENTERO, LOWER, UPPER, LOPPER, LEXEM,IDENTIFICADOR, COMILLADOBLE;
+terminal String CONCAT, CEROMAS, UNOMAS, CERUNO, DISYUNCION, SEPARADOR;
+terminal String ENTERO, LOWER, UPPER, LOPPER, LEXEM,IDENTIFICADOR, ALFA, CARACTER, COMILLADOBLE;
 terminal String CONJUNTO;
 
 non terminal ini;
 non terminal instrucciones, listaInstrucciones, listaLexemas, instruccion;
-non terminal conjuntos, listaL, listaN, expresiones, lexemas;
+non terminal conjuntos, listaL, listaN, expresion, expresionAux, duos, solos, lexemas;
 
-precedence left LLAIZQ, LLADER,CEROMAS, CONCAT, DISYUNCION;
+precedence left LLAIZQ, LLADER,CEROMAS, IDENTIFICADOR;
 
 start with ini; 
 ini::=
@@ -58,7 +58,9 @@ listaInstrucciones::=
 
 instruccion::=
     CONJUNTO DPUNTO IDENTIFICADOR:a {:System.out.print(a + " -> ");:} ASIGNAR conjuntos PTCOMA
+   |IDENTIFICADOR:a {:System.out.print(a + " -> ");:} ASIGNAR expresion PTCOMA 
    |SEPARADOR SEPARADOR SEPARADOR SEPARADOR {:System.out.println("Corte de linea");:} listaLexemas
+   
 ;
 
 conjuntos::=
@@ -82,13 +84,45 @@ listaN::=
    |ENTERO:d {:System.out.println(", "+d);:}
 ;
 
+expresion::=
+    CONCAT duos
+   |DISYUNCION duos
+   |CEROMAS solos
+   |UNOMAS solos
+   |CERUNO solos
+    
+;
+
+expresionAux::=
+    CONCAT duos
+   |DISYUNCION duos
+;
+
+solos::=
+    expresionAux
+   |ALFA
+   |CARACTER
+;
+
+duos::=
+    ALFA ALFA
+   |ALFA expresion
+   |ALFA CARACTER
+   |CARACTER CARACTER
+   |CARACTER ALFA
+   |CARACTER expresion
+   |expresion expresion
+   |expresion ALFA
+   |expresion CARACTER
+;
+
 listaLexemas::=
     listaLexemas lexemas
    |lexemas
 ;
 
 lexemas::=
-   IDENTIFICADOR:a {:System.out.print(a + ": ");:} DPUNTO LEXEM:b {:System.out.print(b);:} PTCOMA
+   IDENTIFICADOR:a {:System.out.print(a + ": ");:} DPUNTO LEXEM:b {:System.out.println(b);:} PTCOMA
 ;
 
 
