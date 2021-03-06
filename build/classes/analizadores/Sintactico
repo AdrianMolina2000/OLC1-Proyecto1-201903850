@@ -5,7 +5,10 @@
  */
 
 package analizadores; 
+
+
 import java_cup.runtime.*;
+import java.util.LinkedList;
 
 parser code 
 {:
@@ -30,12 +33,12 @@ parser code
 
 terminal String DPUNTO, ASIGNAR, RANGO, PTCOMA, COMA, LLAIZQ, LLADER;
 terminal String CONCAT, CEROMAS, UNOMAS, CERUNO, DISYUNCION, SEPARADOR;
-terminal String ENTERO, LOWER, UPPER, LOPPER, LEXEM,IDENTIFICADOR, ALFA, CARACTER, COMILLADOBLE;
-terminal String CONJUNTO;
+terminal String ENTERO, LOWER, UPPER, LOPPER, LEXEM,IDENTIFICADOR, ALFA, COMILLADOBLE;
+terminal String CONJUNTO, SALTO, CARACTER;
 
 non terminal ini;
 non terminal instrucciones, listaInstrucciones, listaLexemas, instruccion;
-non terminal conjuntos, listaL, listaN, expresion, expresionAux, duos, solos, lexemas;
+non terminal conjuntos, listaL, listaN, expresion, expresionAux, duos, solos, hoja, lexemas;
 
 precedence left LLAIZQ, LLADER,CEROMAS, IDENTIFICADOR;
 
@@ -58,7 +61,7 @@ listaInstrucciones::=
 
 instruccion::=
     CONJUNTO DPUNTO IDENTIFICADOR:a {:System.out.print(a + " -> ");:} ASIGNAR conjuntos PTCOMA
-   |IDENTIFICADOR:a {:System.out.print(a + " -> ");:} ASIGNAR expresion PTCOMA 
+   |IDENTIFICADOR:a {:System.out.print(a + " -> ");:} ASIGNAR expresion {:System.out.println();:} PTCOMA 
    |SEPARADOR SEPARADOR SEPARADOR SEPARADOR {:System.out.println("Corte de linea");:} listaLexemas
    
 ;
@@ -85,35 +88,41 @@ listaN::=
 ;
 
 expresion::=
-    CONCAT duos
-   |DISYUNCION duos
-   |CEROMAS solos
-   |UNOMAS solos
-   |CERUNO solos
+    CONCAT:a duos           {:System.out.print(a);:}
+   |DISYUNCION:a duos       {:System.out.print(a);:}
+   |CEROMAS:a solos         {:System.out.print(a);:}
+   |UNOMAS:a solos          {:System.out.print(a);:}
+   |CERUNO:a solos          {:System.out.print(a);:}
     
 ;
 
 expresionAux::=
-    CONCAT duos
-   |DISYUNCION duos
+    CONCAT:a duos           {:System.out.print(a);:}
+   |DISYUNCION:a duos       {:System.out.print(a);:}
 ;
 
 solos::=
     expresionAux
-   |ALFA
-   |CARACTER
+   |ALFA:a {:System.out.print(a);:}
+   |CARACTER:a {:System.out.print(a);:}
+   |SALTO:a {:System.out.print(a);:}
 ;
 
 duos::=
-    ALFA ALFA
-   |ALFA expresion
-   |ALFA CARACTER
-   |CARACTER CARACTER
-   |CARACTER ALFA
-   |CARACTER expresion
+    ALFA:a hoja             {:System.out.print(a);:}
+   |ALFA:a expresion        {:System.out.print(a);:}
+   |CARACTER:a hoja         {:System.out.print(a);:}
+   |CARACTER:a expresion    {:System.out.print(a);:}
    |expresion expresion
-   |expresion ALFA
-   |expresion CARACTER
+   |expresion hoja       
+   |SALTO:a hoja            {:System.out.print(a);:}
+   |SALTO:a expresion       {:System.out.print(a);:}
+;
+
+hoja::=
+    ALFA:a {:System.out.print(a);:}
+   |CARACTER:a {:System.out.print(a);:}
+   |SALTO:a {:System.out.print(a);:}
 ;
 
 listaLexemas::=
