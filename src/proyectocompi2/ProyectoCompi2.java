@@ -28,6 +28,9 @@ public class ProyectoCompi2 {
             LinkedList<ast> arboles = pars.arboles;
             ast arbolito = arboles.getFirst();
 
+
+            
+            
             arbolito.postOrden(arbolito.arbol);
     
             

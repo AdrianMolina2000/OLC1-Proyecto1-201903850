@@ -11,6 +11,7 @@ public class nodo {
     public int ID;
     public char anulable;
     public LinkedList<String> primeros = new LinkedList<>();
+    public LinkedList<String> ultimos = new LinkedList<>();
 
     public nodo(String contenido, nodo izquierda, nodo derecha) {
         this.contenido = contenido;
