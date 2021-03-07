@@ -9,9 +9,15 @@ package analizadores;
 
 import java_cup.runtime.*;
 import java.util.LinkedList;
+import estructuras.ast;
+import estructuras.nodo;
 
 parser code 
 {:
+
+    public LinkedList<ast> arboles = new LinkedList<>();
+
+    
     /**
      * Método al que se llama automáticamente ante algún error sintactico.
      **/ 
@@ -38,8 +44,10 @@ terminal String CONJUNTO, SALTO, CARACTER;
 
 non terminal ini;
 non terminal instrucciones, listaInstrucciones, listaLexemas, instruccion;
-non terminal conjuntos, listaL, listaN, expresion, expresionAux, duos, solos, hoja, lexemas;
+non terminal conjuntos, listaL, listaN, lexemas;
+non terminal nodo expresion, hoja;
 
+precedence right CONCAT, DISYUNCION, CEROMAS, UNOMAS, CERUNO, COMA;
 precedence left LLAIZQ, LLADER,CEROMAS, IDENTIFICADOR;
 
 start with ini; 
@@ -88,35 +96,20 @@ listaN::=
 ;
 
 expresion::=
-    CONCAT:a duos           {:System.out.print(a);:}
-   |DISYUNCION:a duos       {:System.out.print(a);:}
-   |CEROMAS:a solos         {:System.out.print(a);:}
-   |UNOMAS:a solos          {:System.out.print(a);:}
-   |CERUNO:a solos          {:System.out.print(a);:}
-    
-;
-
-expresionAux::=
-    CONCAT:a duos           {:System.out.print(a);:}
-   |DISYUNCION:a duos       {:System.out.print(a);:}
-;
-
-solos::=
-    expresionAux
-   |ALFA:a {:System.out.print(a);:}
-   |CARACTER:a {:System.out.print(a);:}
-   |SALTO:a {:System.out.print(a);:}
-;
-
-duos::=
-    ALFA:a hoja             {:System.out.print(a);:}
-   |ALFA:a expresion        {:System.out.print(a);:}
-   |CARACTER:a hoja         {:System.out.print(a);:}
-   |CARACTER:a expresion    {:System.out.print(a);:}
-   |expresion expresion
-   |expresion hoja       
-   |SALTO:a hoja            {:System.out.print(a);:}
-   |SALTO:a expresion       {:System.out.print(a);:}
+    CONCAT hoja hoja
+   |CONCAT hoja expresion
+   |CONCAT expresion expresion
+   |CONCAT expresion hoja
+   |DISYUNCION hoja hoja
+   |DISYUNCION hoja expresion
+   |DISYUNCION expresion expresion
+   |DISYUNCION expresion hoja
+   |CEROMAS hoja 
+   |CEROMAS expresion
+   |UNOMAS hoja
+   |UNOMAS expresion
+   |CERUNO hoja
+   |CERUNO expresion
 ;
 
 hoja::=

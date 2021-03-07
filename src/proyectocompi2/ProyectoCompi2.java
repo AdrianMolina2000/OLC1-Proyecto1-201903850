@@ -6,6 +6,7 @@
 package proyectocompi2;
 
 import java.io.FileInputStream;
+import estructuras.nodo;
 /**
  *
  * @author Adrian

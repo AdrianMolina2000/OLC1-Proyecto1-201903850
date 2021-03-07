@@ -5,10 +5,19 @@
  */
 
 package analizadores; 
+
+
 import java_cup.runtime.*;
+import java.util.LinkedList;
+import estructuras.ast;
+import estructuras.nodo;
 
 parser code 
 {:
+
+    public LinkedList<ast> arboles = new LinkedList<>();
+
+    
     /**
      * Método al que se llama automáticamente ante algún error sintactico.
      **/ 
@@ -31,12 +40,14 @@ parser code
 terminal String DPUNTO, ASIGNAR, RANGO, PTCOMA, COMA, LLAIZQ, LLADER;
 terminal String CONCAT, CEROMAS, UNOMAS, CERUNO, DISYUNCION, SEPARADOR;
 terminal String ENTERO, LOWER, UPPER, LOPPER, LEXEM,IDENTIFICADOR, ALFA, COMILLADOBLE;
-terminal String CONJUNTO;
+terminal String CONJUNTO, SALTO, CARACTER;
 
 non terminal ini;
 non terminal instrucciones, listaInstrucciones, listaLexemas, instruccion;
-non terminal conjuntos, listaL, listaN, expresiones, expresionesAux, lexemas;
+non terminal conjuntos, listaL, listaN, lexemas;
+non terminal nodo expresion, hoja;
 
+precedence right CONCAT, DISYUNCION, CEROMAS, UNOMAS, CERUNO, COMA;
 precedence left LLAIZQ, LLADER,CEROMAS, IDENTIFICADOR;
 
 start with ini; 
@@ -58,7 +69,7 @@ listaInstrucciones::=
 
 instruccion::=
     CONJUNTO DPUNTO IDENTIFICADOR:a {:System.out.print(a + " -> ");:} ASIGNAR conjuntos PTCOMA
-   |IDENTIFICADOR:a {:System.out.print(a + " -> ");:} ASIGNAR expresiones PTCOMA 
+   |IDENTIFICADOR:a {:System.out.print(a + " -> ");:} ASIGNAR expresion {:System.out.println();:} PTCOMA 
    |SEPARADOR SEPARADOR SEPARADOR SEPARADOR {:System.out.println("Corte de linea");:} listaLexemas
    
 ;
@@ -84,25 +95,29 @@ listaN::=
    |ENTERO:d {:System.out.println(", "+d);:}
 ;
 
-expresiones::=
-    CEROMAS ALFA
-   |CEROMAS expresionesAux
-   |CONCAT ALFA expresiones
-   |CONCAT expresiones IDENTIFICADOR
-   |CONCAT ALFA ALFA
-   |CONCAT expresiones expresiones
-   |DISYUNCION ALFA ALFA
-   |DISYUNCION ALFA expresiones
-   |DISYUNCION expresiones ALFA
-   |DISYUNCION expresiones expresiones
-   |UNOMAS ALFA 
-   |UNOMAS expresionesAux
-   |
+expresion::=
+    CONCAT hoja hoja
+   |CONCAT hoja expresion
+   |CONCAT expresion expresion
+   |CONCAT expresion hoja
+   |DISYUNCION hoja hoja
+   |DISYUNCION hoja expresion
+   |DISYUNCION expresion expresion
+   |DISYUNCION expresion hoja
+   |CEROMAS hoja 
+   |CEROMAS expresion
+   |UNOMAS hoja
+   |UNOMAS expresion
+   |CERUNO hoja
+   |CERUNO expresion
 ;
 
-expresionesAux::=
-    
+hoja::=
+    ALFA:a {:System.out.print(a);:}
+   |CARACTER:a {:System.out.print(a);:}
+   |SALTO:a {:System.out.print(a);:}
 ;
+
 listaLexemas::=
     listaLexemas lexemas
    |lexemas
@@ -111,7 +126,6 @@ listaLexemas::=
 lexemas::=
    IDENTIFICADOR:a {:System.out.print(a + ": ");:} DPUNTO LEXEM:b {:System.out.println(b);:} PTCOMA
 ;
-
 
 
 
