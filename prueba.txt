@@ -3,6 +3,8 @@
 CONJ: letra -> a~z;
 CONJ: digito -> 0~9;
 /////// EXPRESIONES REGULARES
+decimales -> . +{digito} .+ {digito}".";
+exp -> .{b}.*|{a}{b}{a};
 ExpReg2 -> .{L}*|"_"|{L}{D};
 ExpresionReg2 -> .{digito}."."+{digito};
 RegEx3 -> .{digito}*|"_"|{letra}\n;

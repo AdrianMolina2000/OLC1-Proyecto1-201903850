@@ -16,6 +16,7 @@ parser code
 {:
 
     public LinkedList<ast> arboles = new LinkedList<>();
+    public int contador = 0;
 
     
     /**
@@ -73,7 +74,7 @@ listaInstrucciones::=
 
 instruccion::=
     CONJUNTO DPUNTO IDENTIFICADOR:a ASIGNAR conjuntos PTCOMA
-   |IDENTIFICADOR:a ASIGNAR expresion:b {:arboles.add(new ast(a, new nodo(".", b, new nodo("#"))));:} PTCOMA
+   |IDENTIFICADOR:a ASIGNAR expresion:b {:arboles.add(new ast(a, new nodo(".", b, new nodo("#", contador++, "especial"), contador++)));:} PTCOMA
    |SEPARADOR SEPARADOR SEPARADOR SEPARADOR listaLexemas
    
 ;
@@ -100,26 +101,26 @@ listaN::=
 ;
 
 expresion::=
-    DISYUNCION hoja:a hoja:b            {:RESULT = new nodo("|", a, b);:}
-   |DISYUNCION hoja:a expresion:b       {:RESULT = new nodo("|", b, a);:}
-   |DISYUNCION expresion:a expresion:b  {:RESULT = new nodo("|", a, b);:}
-   |DISYUNCION expresion:a hoja:b       {:RESULT = new nodo("|", a, b);:}
-   |CONCAT hoja:a hoja:b                {:RESULT = new nodo(".", a, b);:}
-   |CONCAT hoja:a expresion:b           {:RESULT = new nodo(".", b, a);:}
-   |CONCAT expresion:a expresion:b      {:RESULT = new nodo(".", a, b);:}
-   |CONCAT expresion:a hoja:b           {:RESULT = new nodo(".", a, b);:}
-   |UNOMAS hoja:a                       {:RESULT = new nodo("+", a, null);:}
-   |UNOMAS expresion:a                  {:RESULT = new nodo("+", a, null);:}
-   |CEROMAS hoja:a                      {:RESULT = new nodo("*", a, null);:}
-   |CEROMAS expresion:a                 {:RESULT = new nodo("*", a, null);:}
-   |CERUNO hoja:a                       {:RESULT = new nodo("?", a, null);:}
-   |CERUNO expresion:a                  {:RESULT = new nodo("?", a, null);:}
+    DISYUNCION hoja:a hoja:b            {:RESULT = new nodo("|", a, b, contador++);:}
+   |DISYUNCION hoja:a expresion:b       {:RESULT = new nodo("|", b, a, contador++);:}
+   |DISYUNCION expresion:a expresion:b  {:RESULT = new nodo("|", a, b, contador++);:}
+   |DISYUNCION expresion:a hoja:b       {:RESULT = new nodo("|", a, b, contador++);:}
+   |CONCAT hoja:a hoja:b                {:RESULT = new nodo(".", a, b, contador++);:}
+   |CONCAT hoja:a expresion:b           {:RESULT = new nodo(".", a, b, contador++);:}
+   |CONCAT expresion:a expresion:b      {:RESULT = new nodo(".", a, b, contador++);:}
+   |CONCAT expresion:a hoja:b           {:RESULT = new nodo(".", b, a, contador++);:}
+   |UNOMAS hoja:a                       {:RESULT = new nodo("+", a, null, contador++);:}
+   |UNOMAS expresion:a                  {:RESULT = new nodo("+", a, null, contador++);:}
+   |CEROMAS hoja:a                      {:RESULT = new nodo("*", a, null, contador++);:}
+   |CEROMAS expresion:a                 {:RESULT = new nodo("*", a, null, contador++);:}
+   |CERUNO hoja:a                       {:RESULT = new nodo("?", a, null, contador++);:}
+   |CERUNO expresion:a                  {:RESULT = new nodo("?", a, null, contador++);:}
 ;
 
 hoja::=
-    ALFA:a          {:RESULT = new nodo(a);:}
-   |CARACTER:a      {:RESULT = new nodo(a);:}
-   |SALTO:a         {:RESULT = new nodo(a);:}
+    ALFA:a          {:RESULT = new nodo(a, contador++, "conjunto");:}
+   |CARACTER:a      {:RESULT = new nodo(a, contador++, "caracter");:}
+   |SALTO:a         {:RESULT = new nodo(a, contador++, "especial");:}
 ;
 
 listaLexemas::=

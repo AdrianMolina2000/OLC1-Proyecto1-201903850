@@ -1,0 +1,4 @@
+digraph grafica{
+rankdir=TB;
+node [shape=plaintext];
+some_node [label=<<table border="0" cellborder="1" cellspacing="0"><tr><td>Hoja</td><td>ID</td><td>Siguientes</td></tr><tr><td>{digito}</td><td>1</td><td>[1, 2]</td></tr><tr><td>{digito}</td><td>3</td><td>[3, 4]</td></tr><tr><td>"."</td><td>2</td><td>[3]</td></tr><tr><td>#</td><td>4</td><td>[--]</td></tr></table>>];}
