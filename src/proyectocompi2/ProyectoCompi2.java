@@ -5,8 +5,10 @@
  */
 package proyectocompi2;
 
+import estructuras.ast;
 import java.io.FileInputStream;
 import estructuras.nodo;
+import java.util.LinkedList;
 /**
  *
  * @author Adrian
@@ -21,7 +23,21 @@ public class ProyectoCompi2 {
         analizadores.Sintactico pars;
         try {
             pars=new analizadores.Sintactico(new analizadores.Lexico(new FileInputStream(path)));
-            pars.parse();        
+            pars.parse();
+            
+            LinkedList<ast> arboles = pars.arboles;
+            ast arbolito = arboles.getFirst();
+
+            arbolito.postOrden(arbolito.arbol);
+    
+            
+//            System.out.println(arbolito.arbol.contenido);
+//            nodo a1 = arbolito.arbol.izquierda;
+//            System.out.println(a1.derecha.contenido);
+//            arbolito.postOrden(arbolito.arbol);
+            
+            
+            
         } catch (Exception ex) {
             System.out.println("Error fatal en compilación de entrada.");
             System.out.println("Causa: "+ex.getCause());

@@ -35,6 +35,10 @@ parser code
         (s.left)+ " Columna "+s.right+". Componente " + s.value + 
         " no reconocido."); 
     }  
+
+    public LinkedList<ast> getAST() {
+        return arboles;
+    }
 :} 
 
 terminal String DPUNTO, ASIGNAR, RANGO, PTCOMA, COMA, LLAIZQ, LLADER;
@@ -68,26 +72,26 @@ listaInstrucciones::=
 ;
 
 instruccion::=
-    CONJUNTO DPUNTO IDENTIFICADOR:a {:System.out.print(a + " -> ");:} ASIGNAR conjuntos PTCOMA
-   |IDENTIFICADOR:a {:System.out.print(a + " -> ");:} ASIGNAR expresion {:System.out.println();:} PTCOMA 
-   |SEPARADOR SEPARADOR SEPARADOR SEPARADOR {:System.out.println("Corte de linea");:} listaLexemas
+    CONJUNTO DPUNTO IDENTIFICADOR:a ASIGNAR conjuntos PTCOMA
+   |IDENTIFICADOR:a ASIGNAR expresion:b {:arboles.add(new ast(a, new nodo(".", b, new nodo("#"))));:} PTCOMA
+   |SEPARADOR SEPARADOR SEPARADOR SEPARADOR listaLexemas
    
 ;
 
 conjuntos::=
-    LOWER:b RANGO LOWER:c {:System.out.println("rango: "+b+"~"+c);:}
-   |UPPER:b RANGO UPPER:c {:System.out.println("rango: "+b+"~"+c);:}
-   |ENTERO:b RANGO ENTERO:c {:System.out.println("rango: "+b+"~"+c);:}
-   |LOWER:b {:System.out.print("lista: "+b);:} COMA listaL 
-   |UPPER:b {:System.out.print("lista: "+b);:} COMA listaL 
-   |ENTERO:b {:System.out.print("lista: "+b);:} COMA listaN 
+    LOWER:b RANGO LOWER:c
+   |UPPER:b RANGO UPPER:c
+   |ENTERO:b RANGO ENTERO:c 
+   |LOWER:b  COMA listaL 
+   |UPPER:b  COMA listaL 
+   |ENTERO:b COMA listaN 
 ;
 
 listaL::=
-   |LOWER:d {:System.out.print(", "+d);:} COMA listaL
-   |UPPER:d {:System.out.print(", "+d);:} COMA listaL
-   |LOWER:d {:System.out.println(", "+d);:}
-   |UPPER:d {:System.out.println(", "+d);:}
+   |LOWER:d COMA listaL
+   |UPPER:d COMA listaL
+   |LOWER:d
+   |UPPER:d 
 ;
 
 listaN::=
@@ -96,26 +100,26 @@ listaN::=
 ;
 
 expresion::=
-    CONCAT hoja hoja
-   |CONCAT hoja expresion
-   |CONCAT expresion expresion
-   |CONCAT expresion hoja
-   |DISYUNCION hoja hoja
-   |DISYUNCION hoja expresion
-   |DISYUNCION expresion expresion
-   |DISYUNCION expresion hoja
-   |CEROMAS hoja 
-   |CEROMAS expresion
-   |UNOMAS hoja
-   |UNOMAS expresion
-   |CERUNO hoja
-   |CERUNO expresion
+    DISYUNCION hoja:a hoja:b            {:RESULT = new nodo("|", a, b);:}
+   |DISYUNCION hoja:a expresion:b       {:RESULT = new nodo("|", b, a);:}
+   |DISYUNCION expresion:a expresion:b  {:RESULT = new nodo("|", a, b);:}
+   |DISYUNCION expresion:a hoja:b       {:RESULT = new nodo("|", a, b);:}
+   |CONCAT hoja:a hoja:b                {:RESULT = new nodo(".", a, b);:}
+   |CONCAT hoja:a expresion:b           {:RESULT = new nodo(".", b, a);:}
+   |CONCAT expresion:a expresion:b      {:RESULT = new nodo(".", a, b);:}
+   |CONCAT expresion:a hoja:b           {:RESULT = new nodo(".", a, b);:}
+   |UNOMAS hoja:a                       {:RESULT = new nodo("+", a, null);:}
+   |UNOMAS expresion:a                  {:RESULT = new nodo("+", a, null);:}
+   |CEROMAS hoja:a                      {:RESULT = new nodo("*", a, null);:}
+   |CEROMAS expresion:a                 {:RESULT = new nodo("*", a, null);:}
+   |CERUNO hoja:a                       {:RESULT = new nodo("?", a, null);:}
+   |CERUNO expresion:a                  {:RESULT = new nodo("?", a, null);:}
 ;
 
 hoja::=
-    ALFA:a {:System.out.print(a);:}
-   |CARACTER:a {:System.out.print(a);:}
-   |SALTO:a {:System.out.print(a);:}
+    ALFA:a          {:RESULT = new nodo(a);:}
+   |CARACTER:a      {:RESULT = new nodo(a);:}
+   |SALTO:a         {:RESULT = new nodo(a);:}
 ;
 
 listaLexemas::=
@@ -124,9 +128,6 @@ listaLexemas::=
 ;
 
 lexemas::=
-   IDENTIFICADOR:a {:System.out.print(a + ": ");:} DPUNTO LEXEM:b {:System.out.println(b);:} PTCOMA
+   IDENTIFICADOR:a DPUNTO LEXEM:b PTCOMA
 ;
-
-
-
 

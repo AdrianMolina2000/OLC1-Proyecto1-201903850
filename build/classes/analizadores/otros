@@ -69,7 +69,7 @@ listaInstrucciones::=
 
 instruccion::=
     CONJUNTO DPUNTO IDENTIFICADOR:a {:System.out.print(a + " -> ");:} ASIGNAR conjuntos PTCOMA
-   |IDENTIFICADOR:a {:System.out.print(a + " -> ");:} ASIGNAR expresion {:System.out.println();:} PTCOMA 
+   |IDENTIFICADOR:a ASIGNAR expresion:b {:arboles.add(new ast(a, new nodo(".", b, new nodo("#")));:} PTCOMA 
    |SEPARADOR SEPARADOR SEPARADOR SEPARADOR {:System.out.println("Corte de linea");:} listaLexemas
    
 ;
@@ -96,26 +96,26 @@ listaN::=
 ;
 
 expresion::=
-    CONCAT hoja hoja
-   |CONCAT hoja expresion
-   |CONCAT expresion expresion
-   |CONCAT expresion hoja
-   |DISYUNCION hoja hoja
-   |DISYUNCION hoja expresion
-   |DISYUNCION expresion expresion
-   |DISYUNCION expresion hoja
-   |CEROMAS hoja 
-   |CEROMAS expresion
-   |UNOMAS hoja
-   |UNOMAS expresion
-   |CERUNO hoja
-   |CERUNO expresion
+   |DISYUNCION hoja:a hoja:b            {:RESULT = new nodo("|", a, b);:}
+   |DISYUNCION hoja:a expresion:b       {:RESULT = new nodo("|", a, b);:}
+   |DISYUNCION expresion:a expresion:b  {:RESULT = new nodo("|", a, b);:}
+   |DISYUNCION expresion:a hoja:b       {:RESULT = new nodo("|", a, b);:}
+    CONCAT hoja:a hoja:b                {:RESULT = new nodo(".", a, b);:}
+   |CONCAT hoja:a expresion:b           {:RESULT = new nodo(".", a, b);:}
+   |CONCAT expresion:a expresion:b      {:RESULT = new nodo(".", a, b);:}
+   |CONCAT expresion:a hoja:b           {:RESULT = new nodo(".", a, b);:}
+   |UNOMAS hoja:a                       {:RESULT = new nodo("+", a, null);:}
+   |UNOMAS expresion:a                  {:RESULT = new nodo("+", a, null);:}
+   |CEROMAS hoja:a                      {:RESULT = new nodo("*", a, null);:}
+   |CEROMAS expresion:a                 {:RESULT = new nodo("*", a, null);:}
+   |CERUNO hoja:a                       {:RESULT = new nodo("?", a, null);:}
+   |CERUNO expresion:a                  {:RESULT = new nodo("?", a, null);:}
 ;
 
 hoja::=
-    ALFA:a {:System.out.print(a);:}
-   |CARACTER:a {:System.out.print(a);:}
-   |SALTO:a {:System.out.print(a);:}
+    ALFA:a                  {:RESULT = new nodo(a);:}
+   |CARACTER:a              {:RESULT = new nodo(a);:}
+   |SALTO:a                 {:RESULT = new nodo(a);:}
 ;
 
 listaLexemas::=
@@ -126,6 +126,5 @@ listaLexemas::=
 lexemas::=
    IDENTIFICADOR:a {:System.out.print(a + ": ");:} DPUNTO LEXEM:b {:System.out.println(b);:} PTCOMA
 ;
-
 
 
