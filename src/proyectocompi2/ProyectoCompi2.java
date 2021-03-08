@@ -5,10 +5,12 @@
  */
 package proyectocompi2;
 
-import estructuras.Filas;
+import estructuras.Estado;
+import estructuras.FilasTrans;
 import estructuras.ast;
+import java.io.File;
 import java.io.FileInputStream;
-import estructuras.nodo;
+import java.util.Hashtable;
 import java.util.LinkedList;
 
 /**
@@ -29,10 +31,13 @@ public class ProyectoCompi2 {
 
             LinkedList<ast> arboles = pars.arboles;
             ast arbolito = arboles.get(0);
-
+//
+//              
             arbolito.postOrden(arbolito.arbol);
-            arbolito.arbol.graficar("arbol_numeros.jpg");
+            arbolito.arbol.graficarArbolAST(arbolito.nombre + ".jpg", arbolito.nombre);
             arbolito.getTabla();
+            arbolito.transiciones();
+
         } catch (Exception ex) {
             System.out.println("Error fatal en compilación de entrada.");
             System.out.println("Causa: " + ex.getCause());

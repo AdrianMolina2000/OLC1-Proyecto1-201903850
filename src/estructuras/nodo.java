@@ -1,5 +1,6 @@
 package estructuras;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.LinkedList;
@@ -33,33 +34,46 @@ public class nodo {
         this.tipo = tipo;
     }
 
-    public void graficar(String path) {
+    public void graficarArbolAST(String path, String n) {
+        File imagenes = new File("Imagenes");
+        File arbol = new File("Imagenes/Arbol");
+        if (!imagenes.exists()) {
+            if (!imagenes.mkdirs()) {
+                System.out.println("Error al crear directorio");
+            }
+        }
+        if (!arbol.exists()) {
+            if (!arbol.mkdirs()) {
+                System.out.println("Error al crear directorio");
+            }
+        }
+
         FileWriter fichero = null;
         PrintWriter escritor;
         try {
-            fichero = new FileWriter("aux_grafico.dot");
+            fichero = new FileWriter("Imagenes/Arbol/" + n + ".dot");
             escritor = new PrintWriter(fichero);
-            escritor.print(getCodigoGraphviz());
+            escritor.print(CuerpoGraphvizAST());
         } catch (Exception e) {
-            System.err.println("Error al escribir el archivo aux_grafico.dot");
+            System.err.println("Error al escribir el archivo " + n + ".dot");
         } finally {
             try {
                 if (null != fichero) {
                     fichero.close();
                 }
             } catch (Exception e2) {
-                System.err.println("Error al cerrar el archivo aux_grafico.dot");
+                System.err.println("Error al cerrar el archivo " + n + ".dot");
             }
         }
         try {
             Runtime rt = Runtime.getRuntime();
-            rt.exec("dot -Tjpg -o " + path + " aux_grafico.dot");
+            rt.exec("dot -Tjpg -o " + "Imagenes/Arbol/" + path + " Imagenes/Arbol/" + n + ".dot");
             //Esperamos medio segundo para dar tiempo a que la imagen se genere.
             //Para que no sucedan errores en caso de que se decidan graficar varios
             //árboles sucesivamente.
             Thread.sleep(500);
         } catch (Exception ex) {
-            System.err.println("Error al generar la imagen para el archivo aux_grafico.dot");
+            System.err.println("Error al generar la imagen para el archivo " + n + ".dot");
         }
     }
 
@@ -69,11 +83,11 @@ public class nodo {
      *
      * @return
      */
-    private String getCodigoGraphviz() {
+    private String CuerpoGraphvizAST() {
         return "digraph grafica{\n"
                 + "rankdir=TB;\n"
                 + "node [shape = record, style=filled, fillcolor=seashell2];\n"
-                + getCodigoInterno()
+                + CodigoInternoAST()
                 + "}\n";
     }
 
@@ -84,7 +98,7 @@ public class nodo {
      *
      * @return
      */
-    private String getCodigoInterno() {
+    private String CodigoInternoAST() {
         String etiqueta;
         if (izquierda == null && derecha == null) {
             if (contenido.equals("|")) {
@@ -111,11 +125,11 @@ public class nodo {
             }
         }
         if (izquierda != null) {
-            etiqueta = etiqueta + izquierda.getCodigoInterno()
+            etiqueta = etiqueta + izquierda.CodigoInternoAST()
                     + "nodo" + conta + ":C0->nodo" + izquierda.conta + "\n";
         }
         if (derecha != null) {
-            etiqueta = etiqueta + derecha.getCodigoInterno()
+            etiqueta = etiqueta + derecha.CodigoInternoAST()
                     + "nodo" + conta + ":C1->nodo" + derecha.conta + "\n";
         }
         return etiqueta;
