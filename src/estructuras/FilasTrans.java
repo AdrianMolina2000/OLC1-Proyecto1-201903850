@@ -5,6 +5,7 @@
  */
 package estructuras;
 
+import java.util.Hashtable;
 import java.util.LinkedList;
 
 
@@ -14,9 +15,10 @@ import java.util.LinkedList;
  */
 public class FilasTrans {
     public Estado estado;
-    public LinkedList<String> terminales;
+//    public LinkedList<String> terminales;
+    public Hashtable<String, String> terminales;
 
-    public FilasTrans(Estado estado, LinkedList terminales) {
+    public FilasTrans(Estado estado, Hashtable terminales) {
         this.estado = estado;
         this.terminales = terminales;
     }

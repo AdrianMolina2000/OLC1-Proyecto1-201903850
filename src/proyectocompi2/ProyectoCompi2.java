@@ -5,10 +5,8 @@
  */
 package proyectocompi2;
 
-import estructuras.Estado;
-import estructuras.FilasTrans;
+
 import estructuras.ast;
-import java.io.File;
 import java.io.FileInputStream;
 import java.util.Hashtable;
 import java.util.LinkedList;
@@ -29,10 +27,11 @@ public class ProyectoCompi2 {
             pars = new analizadores.Sintactico(new analizadores.Lexico(new FileInputStream(path)));
             pars.parse();
 
+
             LinkedList<ast> arboles = pars.arboles;
-            ast arbolito = arboles.get(0);
-//
-//              
+            ast arbolito = arboles.get(1);
+
+
             arbolito.postOrden(arbolito.arbol);
             arbolito.arbol.graficarArbolAST(arbolito.nombre + ".jpg", arbolito.nombre);
             arbolito.getTabla();

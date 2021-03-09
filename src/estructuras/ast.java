@@ -191,60 +191,99 @@ public class ast {
 
         }
 
-        if (raiz.estado.equals(
-                "hoja")) {
-            System.out.print(raiz.contenido + "<id:" + raiz.ID + ", " + raiz.anulable + ", " + raiz.primeros + ", " + raiz.ultimos + ">    ");
-        } else {
-            System.out.print(raiz.contenido + "<" + raiz.anulable + ", " + raiz.primeros + ", " + raiz.ultimos + ">    ");
-        }
+//        if (raiz.estado.equals(
+//                "hoja")) {
+//            System.out.print(raiz.contenido + "<id:" + raiz.ID + ", " + raiz.anulable + ", " + raiz.primeros + ", " + raiz.ultimos + ">    ");
+//        } else {
+//            System.out.print(raiz.contenido + "<" + raiz.anulable + ", " + raiz.primeros + ", " + raiz.ultimos + ">    ");
+//        }
     }
 
     public void transiciones() {
         for (String k : alfabeto.keySet()) {
             if (alfa.contains(alfabeto.get(k))) {
             } else {
+//                if (alfabeto.get(k) != "#") {
                 alfa.add(alfabeto.get(k));
+//                }
             }
         }
         Estado inicial = new Estado("S" + count, this.arbol.primeros);
         count++;
         estados.add(inicial);
         transiciones2(inicial);
+        for (FilasTrans i : tablaTrans) {
+            System.out.print(i.estado.numero + i.estado.siguientes + "->        ");
+            System.out.println(i.terminales);
+        }
         graficarTablaTrans("tablaTrans.jpg");
     }
 
     public void transiciones2(Estado estado) {
-        LinkedList<String> terminales = new LinkedList<>();
-        Estado nuevo = new Estado("S-1", terminales);
-        for (String i : estado.siguientes) {
-            for (Filas j : tablaSig) {
-                LinkedList<Estado> aux = new LinkedList<>();
-                if (i.equals(j.ID)) {
-                    for (Estado k : estados) {
-                        if (k.siguientes.containsAll(j.siguientes) && j.siguientes.containsAll(k.siguientes)) {
+        LinkedList<LinkedList> sig = new LinkedList<>();
+        Hashtable<String, String> terminal = new Hashtable<>();
+        for (String i : alfa) {
+            sig.add(new LinkedList<>());
+            terminal.put(i, "---");
+        }
+        LinkedList<Estado> estadosTemp = new LinkedList<>();
+//        LinkedList<String> terminales = new LinkedList<>();
+//        LinkedList<String> nada = new LinkedList<>();
+//        nada.add("");
+//        Estado estadoTemp2 = new Estado("---", nada);
 
-                        } else {
-                            nuevo = new Estado("S" + count, j.siguientes);
-                            aux.add(nuevo);
-                            count++;
+        for (String i : estado.siguientes) {
+            int listaNum = 0;
+            for (String j : alfa) {
+//                estadoTemp2 = new Estado("---", nada);
+
+                for (Filas k : tablaSig) {
+                    if (k.alfabeto.equals(j)) {
+                        if (k.ID.equals(i)) {
+                            for (String m : k.siguientes) {
+                                if (!sig.get(listaNum).contains(m)) {
+                                    sig.get(listaNum).add(m);
+                                }
+                            }
+                            Estado estadoTemp = new Estado("S" + count, sig.get(listaNum));
+                            Estado estadoTemp2 = new Estado("S" + (count - 1), sig.get(listaNum));
+                            if (!verificarEstado(estadoTemp, estados)) {
+                                estadosTemp.add(estadoTemp);
+                                estados.add(estadoTemp);
+                                count++;
+                                terminal.put(j, estadoTemp.numero);
+
+                            }
+                            if (estadosTemp.size() == 0) {
+                                terminal.put(j, estadoTemp2.numero);
+                            }
 
                         }
-
                     }
-                    estados.addAll(aux);
-
                 }
+//                terminales.add(estadoTemp2.numero + estadoTemp2.siguientes);
+                listaNum++;
             }
-            if (alfa.contains(alfabeto.get(i))) {
-                terminales.add(alfabeto.get(i));
-            }
+//            terminales.add(estadoTemp2.numero);
 
         }
-        tablaTrans.add(new FilasTrans(estado, terminales));
-        if (terminales.contains("#")) {
+        tablaTrans.add(new FilasTrans(estado, terminal));
+        if (estadosTemp.size() != 0) {
+            for (Estado i : estadosTemp) {
+                transiciones2(i);
+            }
+        } else {
             return;
         }
-        transiciones2(nuevo);
+    }
+
+    public boolean verificarEstado(Estado estado, LinkedList<Estado> estados) {
+        for (Estado i : estados) {
+            if (estado.siguientes.containsAll(i.siguientes) && i.siguientes.containsAll(estado.siguientes)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void getTabla() {
@@ -252,9 +291,9 @@ public class ast {
         filaFinal.add("--");
         tablaSig.add(new Filas(alfabeto.get(String.valueOf(id - 1)), String.valueOf((id - 1)), filaFinal));
         System.out.println("");
-        for (Filas k : this.tablaSig) {
-            System.out.println(k.alfabeto + "|" + k.ID + "|" + k.siguientes);
-        }
+//        for (Filas k : this.tablaSig) {
+//            System.out.println(k.alfabeto + "|" + k.ID + "|" + k.siguientes);
+//        }
         graficarTabla(nombre + ".jpg");
     }
 
@@ -402,16 +441,16 @@ public class ast {
 
         etiqueta += "<tr><td>Estado</td>";
         for (String i : alfa) {
-            if (i.equals("#")) {
-
-            } else {
-                etiqueta += "<td>" + i + "</td>";
-            }
+            etiqueta += "<td>" + i + "</td>";
         }
 
         etiqueta += "</tr>";
         for (FilasTrans i : tablaTrans) {
-            etiqueta += "<tr><td>" + i.estado.numero + i.estado.siguientes + "</td><td>" + i.terminales + "</td><td></td></tr>";
+            etiqueta += "<tr><td>" + i.estado.numero + i.estado.siguientes + "</td>";
+            for (int j = 0; j < i.terminales.size(); j++) {
+                etiqueta += "<td>" + i.terminales.get(alfa.get(j)) + "</td>";
+            }
+            etiqueta += "</tr>";
         }
 
         etiqueta += "</table>>" + "];";
