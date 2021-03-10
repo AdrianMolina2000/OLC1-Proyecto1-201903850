@@ -1,0 +1,45 @@
+digraph grafica{
+rankdir=TB;
+node [shape = record, style=filled, fillcolor=seashell2];
+nodo36 [ label ="[1]|{N|.|0}|[11]"];
+nodo34 [ label ="[1]|{N|.|0}|[10]"];
+nodo16 [ label ="[1]|{N|{num}|1}|[1]"];
+nodo34:C0->nodo16
+nodo33 [ label ="[2]|{N|.|0}|[10]"];
+nodo17 [ label ="[2]|{N|{num}|2}|[2]"];
+nodo33:C0->nodo17
+nodo32 [ label ="[3]|{N|.|0}|[10]"];
+nodo18 [ label ="[3]|{N|&quot;"+"/"+"&quot;|3}|[3]"];
+nodo32:C0->nodo18
+nodo31 [ label ="[4]|{N|.|0}|[10]"];
+nodo19 [ label ="[4]|{N|{num}|4}|[4]"];
+nodo31:C0->nodo19
+nodo30 [ label ="[5]|{N|.|0}|[10]"];
+nodo20 [ label ="[5]|{N|{num}|5}|[5]"];
+nodo30:C0->nodo20
+nodo29 [ label ="[6]|{N|.|0}|[10]"];
+nodo21 [ label ="[6]|{N|&quot;"+"/"+"&quot;|6}|[6]"];
+nodo29:C0->nodo21
+nodo28 [ label ="[7]|{N|.|0}|[10]"];
+nodo22 [ label ="[7]|{N|{num}|7}|[7]"];
+nodo28:C0->nodo22
+nodo27 [ label ="[8]|{N|.|0}|[10]"];
+nodo23 [ label ="[8]|{N|{num}|8}|[8]"];
+nodo27:C0->nodo23
+nodo26 [ label ="[9]|{N|.|0}|[10]"];
+nodo24 [ label ="[9]|{N|{num}|9}|[9]"];
+nodo26:C0->nodo24
+nodo25 [ label ="[10]|{N|{num}|10}|[10]"];
+nodo26:C1->nodo25
+nodo27:C1->nodo26
+nodo28:C1->nodo27
+nodo29:C1->nodo28
+nodo30:C1->nodo29
+nodo31:C1->nodo30
+nodo32:C1->nodo31
+nodo33:C1->nodo32
+nodo34:C1->nodo33
+nodo36:C0->nodo34
+nodo35 [ label ="[11]|{N|#|11}|[11]"];
+nodo36:C1->nodo35
+}

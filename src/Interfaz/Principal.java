@@ -220,7 +220,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void GenAutomatasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenAutomatasActionPerformed
         // TODO add your handling code here:
-        proyectocompi2.ProyectoCompi2.interpretar(path);
+        interpretar(path);
+        crearArbol();
     }//GEN-LAST:event_GenAutomatasActionPerformed
 
     /**
