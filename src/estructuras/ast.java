@@ -203,20 +203,22 @@ public class ast {
         for (String k : alfabeto.keySet()) {
             if (alfa.contains(alfabeto.get(k))) {
             } else {
-//                if (alfabeto.get(k) != "#") {
-                alfa.add(alfabeto.get(k));
-//                }
+                if (alfabeto.get(k) != "#") {
+                    alfa.add(alfabeto.get(k));
+                }
             }
         }
         Estado inicial = new Estado("S" + count, this.arbol.primeros);
         count++;
         estados.add(inicial);
         transiciones2(inicial);
-        for (FilasTrans i : tablaTrans) {
-            System.out.print(i.estado.numero + i.estado.siguientes + "->        ");
-            System.out.println(i.terminales);
-        }
-        graficarTablaTrans("tablaTrans.jpg");
+//        for (FilasTrans i : tablaTrans) {
+//            System.out.print(i.estado.numero + i.estado.siguientes + "->        ");
+//            System.out.println(i.terminales);
+//        }
+        graficarTablaTrans(nombre + ".jpg");
+        graficarAFD(nombre + ".jpg");
+
     }
 
     public void transiciones2(Estado estado) {
@@ -227,10 +229,6 @@ public class ast {
             terminal.put(i, "---");
         }
         LinkedList<Estado> estadosTemp = new LinkedList<>();
-//        LinkedList<String> terminales = new LinkedList<>();
-//        LinkedList<String> nada = new LinkedList<>();
-//        nada.add("");
-//        Estado estadoTemp2 = new Estado("---", nada);
 
         for (String i : estado.siguientes) {
             int listaNum = 0;
@@ -267,12 +265,15 @@ public class ast {
 //            terminales.add(estadoTemp2.numero);
 
         }
-        tablaTrans.add(new FilasTrans(estado, terminal));
+
         if (estadosTemp.size() != 0) {
+            tablaTrans.add(new FilasTrans(estado, terminal));
             for (Estado i : estadosTemp) {
                 transiciones2(i);
             }
         } else {
+            estado.aceptacion = "A";
+            tablaTrans.add(new FilasTrans(estado, terminal));
             return;
         }
     }
@@ -382,33 +383,47 @@ public class ast {
     }
 
     private void graficarTablaTrans(String path) {
+        File imagenes = new File("Imagenes");
+        File transicion = new File("Imagenes/Transicion");
+        if (!imagenes.exists()) {
+            if (imagenes.mkdirs()) {
+                System.out.println("Directorio creado");
+            } else {
+                System.out.println("Error al crear directorio");
+            }
+        }
+        if (!transicion.exists()) {
+            if (!transicion.mkdirs()) {
+                System.out.println("Error al crear directorio");
+            }
+        }
 
         FileWriter fichero = null;
         PrintWriter escritor;
         try {
-            fichero = new FileWriter("tablaTrans.dot");
+            fichero = new FileWriter("Imagenes/Transicion/" + nombre + ".dot");
             escritor = new PrintWriter(fichero);
             escritor.print(getCodigoTablaTrans());
         } catch (Exception e) {
-            System.err.println("Error al escribir el archivo TablaTrans.dot");
+            System.err.println("Error al escribir el archivo" + nombre + ".dot");
         } finally {
             try {
                 if (null != fichero) {
                     fichero.close();
                 }
             } catch (Exception e2) {
-                System.err.println("Error al cerrar el TablaTrans.dot");
+                System.err.println("Error al cerrar el" + nombre + ".dot");
             }
         }
         try {
             Runtime rt = Runtime.getRuntime();
-            rt.exec("dot -Tjpg -o " + path + " TablaTrans.dot");
+            rt.exec("dot -Tjpg -o " + "Imagenes/Transicion/" + path + " Imagenes/Transicion/" + nombre + ".dot");
             //Esperamos medio segundo para dar tiempo a que la imagen se genere.
             //Para que no sucedan errores en caso de que se decidan graficar varios
             //árboles sucesivamente.
             Thread.sleep(500);
         } catch (Exception ex) {
-            System.err.println("Error al generar la imagen para el archivo TablaTrans.dot");
+            System.err.println("Error al generar la imagen para el archivo" + nombre + ".dot");
         }
     }
 
@@ -454,6 +469,90 @@ public class ast {
         }
 
         etiqueta += "</table>>" + "];";
+
+        return etiqueta;
+    }
+
+    private void graficarAFD(String path) {
+        File imagenes = new File("Imagenes");
+        File transicion = new File("Imagenes/AFD");
+        if (!imagenes.exists()) {
+            if (imagenes.mkdirs()) {
+                System.out.println("Directorio creado");
+            } else {
+                System.out.println("Error al crear directorio");
+            }
+        }
+        if (!transicion.exists()) {
+            if (!transicion.mkdirs()) {
+                System.out.println("Error al crear directorio");
+            }
+        }
+
+        FileWriter fichero = null;
+        PrintWriter escritor;
+        try {
+            fichero = new FileWriter("Imagenes/AFD/" + nombre + ".dot");
+            escritor = new PrintWriter(fichero);
+            escritor.print(getCodigoAFD());
+        } catch (Exception e) {
+            System.err.println("Error al escribir el archivo" + nombre + ".dot");
+        } finally {
+            try {
+                if (null != fichero) {
+                    fichero.close();
+                }
+            } catch (Exception e2) {
+                System.err.println("Error al cerrar el" + nombre + ".dot");
+            }
+        }
+        try {
+            Runtime rt = Runtime.getRuntime();
+            rt.exec("dot -Tjpg -o " + "Imagenes/AFD/" + path + " Imagenes/AFD/" + nombre + ".dot");
+            //Esperamos medio segundo para dar tiempo a que la imagen se genere.
+            //Para que no sucedan errores en caso de que se decidan graficar varios
+            //árboles sucesivamente.
+            Thread.sleep(500);
+        } catch (Exception ex) {
+            System.err.println("Error al generar la imagen para el archivo" + nombre + ".dot");
+        }
+    }
+
+    /**
+     * Método que retorna el código que grapviz usará para generar la imagen del
+     * AST.
+     *
+     * @return
+     */
+    private String getCodigoAFD() {
+        return "digraph grafica{\n"
+                + "rankdir=LR;\n"
+                + "node [shape =circle, style=filled, fillcolor=seashell2];\n"
+                + getCodigoAFD2()
+                + "}\n";
+    }
+
+    /**
+     * Genera el código interior de graphviz, este método tiene la
+     * particularidad de ser recursivo, esto porque recorrer un árbol de forma
+     * recursiva es bastante sencillo y reduce el código considerablemente.
+     *
+     * @return
+     */
+    private String getCodigoAFD2() {
+        String etiqueta = "";
+        for (FilasTrans i : tablaTrans) {
+            etiqueta += i.estado.numero + "[label=\"" + i.estado.numero + "\"];\n";
+            if (i.estado.aceptacion.equals("A")) {
+                etiqueta += i.estado.numero + "[label=\"" + i.estado.numero + "\" shape =\"doublecircle\"];\n";
+            }
+            for (int j = 0; j < i.terminales.size(); j++) {
+                if (i.terminales.get(alfa.get(j)) != "---") {
+                    etiqueta += i.estado.numero + "->" + i.terminales.get(alfa.get(j)) + "\n";
+                }
+            }
+
+        }
 
         return etiqueta;
     }

@@ -42,9 +42,9 @@ parser code
     }
 :} 
 
-terminal String DPUNTO, ASIGNAR, RANGO, PTCOMA, COMA, LLAIZQ, LLADER;
+terminal String DPUNTO, ASI, GNAR, RANGO, PTCOMA, COMA, LLAIZQ, LLADER;
 terminal String CONCAT, CEROMAS, UNOMAS, CERUNO, DISYUNCION, SEPARADOR;
-terminal String ENTERO, LOWER, UPPER, LOPPER, LEXEM,IDENTIFICADOR, ALFA, COMILLADOBLE;
+terminal String ENTERO, LOWER, UPPER, LOPPER, ASCII, LEXEM,IDENTIFICADOR, ALFA, COMILLADOBLE;
 terminal String CONJUNTO, SALTO, CARACTER;
 
 non terminal ini;
@@ -73,15 +73,16 @@ listaInstrucciones::=
 ;
 
 instruccion::=
-    CONJUNTO DPUNTO IDENTIFICADOR:a ASIGNAR conjuntos PTCOMA
-   |IDENTIFICADOR:a ASIGNAR expresion:b {:arboles.add(new ast(a, new nodo(".", b, new nodo("#", contador++, "especial"), contador++)));:} PTCOMA
-   |SEPARADOR SEPARADOR SEPARADOR SEPARADOR listaLexemas
+    CONJUNTO DPUNTO IDENTIFICADOR:a ASI GNAR conjuntos PTCOMA
+   |IDENTIFICADOR:a ASI GNAR expresion:b {:arboles.add(new ast(a, new nodo(".", b, new nodo("#", contador++, "especial"), contador++)));:} PTCOMA
+   |SEPARADOR SEPARADOR listaLexemas
    
 ;
 
 conjuntos::=
     LOWER:b RANGO LOWER:c
    |UPPER:b RANGO UPPER:c
+   |ASCII RANGO ASCII
    |ENTERO:b RANGO ENTERO:c 
    |LOWER:b  COMA listaL 
    |UPPER:b  COMA listaL 
@@ -96,8 +97,8 @@ listaL::=
 ;
 
 listaN::=
-   |ENTERO:d {:System.out.print(", "+d);:} COMA listaN
-   |ENTERO:d {:System.out.println(", "+d);:}
+   |ENTERO:d COMA listaN
+   |ENTERO:d 
 ;
 
 expresion::=

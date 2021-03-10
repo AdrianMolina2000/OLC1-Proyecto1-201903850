@@ -25,6 +25,7 @@ D=[0-9]
 letMin=[a-z]
 letMay=[A-Z]
 LetMM=[A-Za-z]
+asciip = [ -~]
 ID=[A-Za-z]+[_0-9A-Za-z]*
 
 Conjuntos= \{[A-Za-z]+[_0-9A-Za-z]*\}
@@ -36,7 +37,7 @@ lex = \"([^\"])+\"
 COMENTARIOML = \<\!([^!\>]|[^!]\>|\![^\>])*\!\>
 COMENTARIO = (\/\/.*)
 CD = [\"]
-PER = %
+PER = %%
 
 %%
 
@@ -48,7 +49,8 @@ PER = %
                              yytext());} 
 
 ":" {return new Symbol(sym.DPUNTO,yyline,yychar, yytext());}
-"->" {return new Symbol(sym.ASIGNAR,yyline,yychar, yytext());}
+"-" {return new Symbol(sym.ASI,yyline,yychar, yytext());}
+">" {return new Symbol(sym.GNAR,yyline,yychar, yytext());}
 "~" {return new Symbol(sym.RANGO,yyline,yychar, yytext());}
 ";" {return new Symbol(sym.PTCOMA,yyline,yychar, yytext());}
 "," {return new Symbol(sym.COMA,yyline,yychar, yytext());}
@@ -69,6 +71,7 @@ PER = %
 {letMay} {return new Symbol(sym.UPPER,yyline,yychar, yytext());} 
 {LetMM} {return new Symbol(sym.LOPPER,yyline,yychar, yytext());}
 {ID} {return new Symbol(sym.IDENTIFICADOR,yyline,yychar, yytext());}
+{asciip} {return new Symbol(sym.ASCII,yyline,yychar, yytext());}
 {Conjuntos} {return new Symbol(sym.ALFA,yyline,yychar, yytext());}
 {carac} {return new Symbol(sym.CARACTER,yyline,yychar, yytext());}
 {lex} {return new Symbol(sym.LEXEM,yyline,yychar, yytext());}

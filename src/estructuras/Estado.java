@@ -14,6 +14,7 @@ import java.util.LinkedList;
 public class Estado {
     public String numero;
     public LinkedList<String> siguientes= new LinkedList<>();
+    public String aceptacion = "";
 
     public Estado(String numero, LinkedList lista) {
         this.numero = numero;

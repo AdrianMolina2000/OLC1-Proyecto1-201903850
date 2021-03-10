@@ -18,7 +18,7 @@ import java.util.LinkedList;
 public class ProyectoCompi2 {
 
     public static void main(String[] args) {
-        interpretar("prueba.txt");
+        interpretar("pruebamedia.olc");
     }
 
     private static void interpretar(String path) {
@@ -29,7 +29,7 @@ public class ProyectoCompi2 {
 
 
             LinkedList<ast> arboles = pars.arboles;
-            ast arbolito = arboles.get(1);
+            ast arbolito = arboles.get(2);
 
 
             arbolito.postOrden(arbolito.arbol);
