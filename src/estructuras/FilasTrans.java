@@ -15,7 +15,6 @@ import java.util.LinkedList;
  */
 public class FilasTrans {
     public Estado estado;
-//    public LinkedList<String> terminales;
     public Hashtable<String, String> terminales;
 
     public FilasTrans(Estado estado, Hashtable terminales) {

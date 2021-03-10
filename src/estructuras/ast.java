@@ -212,10 +212,6 @@ public class ast {
         count++;
         estados.add(inicial);
         transiciones2(inicial);
-//        for (FilasTrans i : tablaTrans) {
-//            System.out.print(i.estado.numero + i.estado.siguientes + "->        ");
-//            System.out.println(i.terminales);
-//        }
         graficarTablaTrans(nombre + ".jpg");
         graficarAFD(nombre + ".jpg");
 
@@ -233,7 +229,6 @@ public class ast {
         for (String i : estado.siguientes) {
             int listaNum = 0;
             for (String j : alfa) {
-//                estadoTemp2 = new Estado("---", nada);
 
                 for (Filas k : tablaSig) {
                     if (k.alfabeto.equals(j)) {
@@ -250,7 +245,8 @@ public class ast {
                                 estados.add(estadoTemp);
                                 count++;
                                 terminal.put(j, estadoTemp.numero);
-
+                            } else {
+                                terminal.put(j, estadoTemp2.numero);
                             }
                             if (estadosTemp.size() == 0) {
                                 terminal.put(j, estadoTemp2.numero);
@@ -259,11 +255,8 @@ public class ast {
                         }
                     }
                 }
-//                terminales.add(estadoTemp2.numero + estadoTemp2.siguientes);
                 listaNum++;
             }
-//            terminales.add(estadoTemp2.numero);
-
         }
 
         if (estadosTemp.size() != 0) {
@@ -548,13 +541,14 @@ public class ast {
             }
             for (int j = 0; j < i.terminales.size(); j++) {
                 if (i.terminales.get(alfa.get(j)) != "---") {
-                    etiqueta += i.estado.numero + "->" + i.terminales.get(alfa.get(j)) + "\n";
+                    if (alfa.get(j).contains("\"")) {
+                        etiqueta += i.estado.numero + "->" + i.terminales.get(alfa.get(j)) + "[label=" + alfa.get(j) + "]\n";
+                    } else {
+                        etiqueta += i.estado.numero + "->" + i.terminales.get(alfa.get(j)) + "[label=\"" + alfa.get(j) + "\"]\n";
+                    }
                 }
             }
-
         }
-
         return etiqueta;
     }
-
 }

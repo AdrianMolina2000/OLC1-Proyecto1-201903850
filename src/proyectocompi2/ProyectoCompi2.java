@@ -5,11 +5,15 @@
  */
 package proyectocompi2;
 
-
+import Interfaz.Principal;
 import estructuras.ast;
+import java.io.File;
 import java.io.FileInputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Hashtable;
 import java.util.LinkedList;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
  *
@@ -18,25 +22,23 @@ import java.util.LinkedList;
 public class ProyectoCompi2 {
 
     public static void main(String[] args) {
-        interpretar("pruebamedia.olc");
+        Principal interfaz = new Principal();
+//        interpretar("pruebamedia.olc");
     }
 
-    private static void interpretar(String path) {
+    public static void interpretar(String path) {
         analizadores.Sintactico pars;
         try {
             pars = new analizadores.Sintactico(new analizadores.Lexico(new FileInputStream(path)));
             pars.parse();
 
-
             LinkedList<ast> arboles = pars.arboles;
-            ast arbolito = arboles.get(2);
-
-
-            arbolito.postOrden(arbolito.arbol);
-            arbolito.arbol.graficarArbolAST(arbolito.nombre + ".jpg", arbolito.nombre);
-            arbolito.getTabla();
-            arbolito.transiciones();
-
+            for (ast arbolito : arboles) {
+                arbolito.postOrden(arbolito.arbol);
+                arbolito.arbol.graficarArbolAST(arbolito.nombre + ".jpg", arbolito.nombre);
+                arbolito.getTabla();
+                arbolito.transiciones();
+            }
         } catch (Exception ex) {
             System.out.println("Error fatal en compilación de entrada.");
             System.out.println("Causa: " + ex.getCause());

@@ -5,11 +5,15 @@
  */
 package Interfaz;
 
+import estructuras.ast;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.LinkedList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -21,6 +25,7 @@ public class Principal extends javax.swing.JFrame {
     File archivo;
     FileInputStream entrada;
     FileOutputStream salida;
+    String path;
 
     /**
      * Creates new form Principal
@@ -28,6 +33,57 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
+        crearArbol();
+    }
+
+    public static void interpretar(String path) {
+        analizadores.Sintactico pars;
+        try {
+            pars = new analizadores.Sintactico(new analizadores.Lexico(new FileInputStream(path)));
+            pars.parse();
+
+            LinkedList<ast> arboles = pars.arboles;
+            for (ast arbolito : arboles) {
+                arbolito.postOrden(arbolito.arbol);
+                arbolito.arbol.graficarArbolAST(arbolito.nombre + ".jpg", arbolito.nombre);
+                arbolito.getTabla();
+                arbolito.transiciones();
+            }
+        } catch (Exception ex) {
+            System.out.println("Error fatal en compilación de entrada.");
+            System.out.println("Causa: " + ex.getCause());
+        }
+    }
+
+    private void crearArbol() {
+
+        DefaultMutableTreeNode carpetaRaiz = new DefaultMutableTreeNode("Imagenes");
+        DefaultTreeModel modelo = new DefaultTreeModel(carpetaRaiz);
+        arbol.setModel(modelo);
+
+        File dir = new File("Imagenes");
+        String[] ficheros = dir.list();
+        if (ficheros != null) {
+            int n = 0;
+            for (String i : ficheros) {
+                DefaultMutableTreeNode carpeta = new DefaultMutableTreeNode(i);
+                modelo.insertNodeInto(carpeta, carpetaRaiz, n);
+                n++;
+                File dir2 = new File("Imagenes/" + i);
+                String[] ficheros2 = dir2.list();
+                if (ficheros2 != null) {
+                    int m = 0;
+                    for (String j : ficheros2) {
+                        if (!j.endsWith(".dot")) {
+                            File f = new File("Imagenes/" + i + "/" + j);
+                            DefaultMutableTreeNode archivo = new DefaultMutableTreeNode(new Imagen(j, f.getPath()));
+                            modelo.insertNodeInto(archivo, carpeta, m);
+                            m++;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public String AbrirArchivo(File archivo) {
@@ -58,8 +114,11 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtArea = new javax.swing.JTextArea();
         GenAutomatas = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        arbol = new javax.swing.JTree();
         jScrollPane2 = new javax.swing.JScrollPane();
-        Jlist = new javax.swing.JList<>();
+        JP_Imagenes = new javax.swing.JPanel();
+        JL_ImagenesMostrar = new javax.swing.JLabel();
         Fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -81,19 +140,43 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 270, 260));
 
         GenAutomatas.setText("Generar Automatas");
+        GenAutomatas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GenAutomatasActionPerformed(evt);
+            }
+        });
         getContentPane().add(GenAutomatas, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
 
-        Jlist.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        arbol.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                arbolMouseClicked(evt);
+            }
         });
-        jScrollPane2.setViewportView(Jlist);
+        arbol.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
+                arbolValueChanged(evt);
+            }
+        });
+        arbol.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                arbolKeyPressed(evt);
+            }
+        });
+        jScrollPane3.setViewportView(arbol);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 100, 320));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, 140, 300));
+
+        JP_Imagenes.setBackground(new java.awt.Color(255, 255, 255));
+        JP_Imagenes.setForeground(new java.awt.Color(255, 255, 255));
+        JP_Imagenes.setLayout(new javax.swing.BoxLayout(JP_Imagenes, javax.swing.BoxLayout.LINE_AXIS));
+        JP_Imagenes.add(JL_ImagenesMostrar);
+
+        jScrollPane2.setViewportView(JP_Imagenes);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, 410, 450));
 
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo Biblioteca.png"))); // NOI18N
-        getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
+        getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -102,15 +185,43 @@ public class Principal extends javax.swing.JFrame {
         if (seleccionar.showDialog(null, "Abrir") == JFileChooser.APPROVE_OPTION) {
             archivo = seleccionar.getSelectedFile();
             if (archivo.canRead()) {
-                if(archivo.getName().endsWith("txt")){
+                if (archivo.getName().endsWith("olc")) {
+                    path = archivo.getName();
                     String documento = AbrirArchivo(archivo);
                     txtArea.setText(documento);
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(null, "Archivo no compatible");
                 }
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void arbolKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_arbolKeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_arbolKeyPressed
+
+    private void arbolValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_arbolValueChanged
+        // TODO add your handling code here:
+        DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) arbol.getLastSelectedPathComponent();
+        if (nodo == null) {
+            return;
+        }
+        try {
+            Imagen img = (Imagen) nodo.getUserObject();
+            JL_ImagenesMostrar.setIcon(new javax.swing.ImageIcon(img.ruta));
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_arbolValueChanged
+
+    private void arbolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_arbolMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_arbolMouseClicked
+
+    private void GenAutomatasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenAutomatasActionPerformed
+        // TODO add your handling code here:
+        proyectocompi2.ProyectoCompi2.interpretar(path);
+    }//GEN-LAST:event_GenAutomatasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,10 +261,13 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Fondo;
     private javax.swing.JButton GenAutomatas;
-    private javax.swing.JList<String> Jlist;
+    private javax.swing.JLabel JL_ImagenesMostrar;
+    private javax.swing.JPanel JP_Imagenes;
+    private javax.swing.JTree arbol;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea txtArea;
     // End of variables declaration//GEN-END:variables
 }
