@@ -16,5 +16,5 @@ node [shape =circle, style=filled, fillcolor=seashell2];
 10->11 [label ="ε"];
 11->2 [label ="ε"];
 11->12 [label ="ε"];
-1->12 [label ="ε"];
+1->12 [label ="ε" shape ="doublecircle"];
 }

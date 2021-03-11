@@ -1,0 +1,15 @@
+digraph grafica{
+rankdir=LR;
+node [shape =circle, style=filled, fillcolor=seashell2];
+S0[label="S0"];
+S0->S1[label="@"]
+S1[label="S1"];
+S1->S2[label="{mayus}"]
+S1->S2[label="{minus}"]
+S2[label="S2"];
+S2[label="S2" shape ="doublecircle"];
+S2->S2[label="{num}"]
+S2->S2[label="{mayus}"]
+S2->S2[label="{minus}"]
+S2->S2[label="_"]
+}

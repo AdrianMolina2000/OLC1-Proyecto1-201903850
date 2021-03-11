@@ -78,6 +78,7 @@ public class AFND {
                             return listaTemp;
                         }
                         izquierda.removeLast();
+                        izquierda.getLast().aceptacion = "Si";
                         return izquierda;
                     case "|":
                         listaTemp.add(new nodoAFN(contador, "ε", (contador + 1)));
@@ -86,7 +87,6 @@ public class AFND {
                         derecha = sumar(derecha, contador2);
                         listaTemp.add(new nodoAFN(contador, "ε", contador2));
                         contador2 += obtenerTamano(derecha);
-
                         izquierda.getLast().cambiar("ε", contador2);
                         derecha.getLast().cambiar("ε", contador2);
                         listaTemp.addAll(izquierda);
@@ -202,7 +202,12 @@ public class AFND {
             if (x.mueve.contains("\"")) {
                 etiqueta += +x.inicio + "->" + x.fin + " [label =" + x.mueve + "];\n";
             } else {
-                etiqueta += +x.inicio + "->" + x.fin + " [label =\"" + x.mueve + "\"];\n";
+                if (x.aceptacion.equals("Si")) {
+                    etiqueta += +x.inicio + "->" + x.fin + " [label =\"" + x.mueve + "\" shape =\"doublecircle\"];\n";
+
+                } else {
+                    etiqueta += +x.inicio + "->" + x.fin + " [label =\"" + x.mueve + "\"];\n";
+                }
             }
         }
         return etiqueta;

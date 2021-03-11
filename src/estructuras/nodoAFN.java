@@ -14,6 +14,7 @@ public class nodoAFN {
     public int inicio;
     public String mueve;
     public int fin;
+    public String aceptacion = "";
 
     public nodoAFN(int inicio, String mueve, int fin) {
         this.inicio = inicio;
