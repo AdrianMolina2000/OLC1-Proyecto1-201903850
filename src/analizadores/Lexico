@@ -38,6 +38,7 @@ COMENTARIOML = \<\!([^!\>]|[^!]\>|\![^\>])*\!\>
 COMENTARIO = (\/\/.*)
 CD = [\"]
 PER = %%
+diagonal = (\\[ -~])
 
 %%
 
@@ -62,6 +63,8 @@ PER = %%
 "|" {return new Symbol(sym.DISYUNCION,yyline,yychar, yytext());} 
 "+" {return new Symbol(sym.UNOMAS,yyline,yychar, yytext());} 
 "?" {return new Symbol(sym.CERUNO,yyline,yychar, yytext());} 
+
+"diagonal" {return new Symbol(sym.DIAG,yyline,yychar, yytext());} 
 
 \n {yychar=1;}
 

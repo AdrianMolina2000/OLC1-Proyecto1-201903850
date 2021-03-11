@@ -11,13 +11,14 @@ public class sym {
   public static final int LLAIZQ = 8;
   public static final int LLADER = 9;
   public static final int GNAR = 4;
-  public static final int CONJUNTO = 25;
+  public static final int DIAG = 25;
+  public static final int CONJUNTO = 26;
   public static final int UNOMAS = 12;
   public static final int ALFA = 23;
   public static final int CERUNO = 13;
   public static final int CONCAT = 10;
   public static final int UPPER = 18;
-  public static final int CARACTER = 27;
+  public static final int CARACTER = 28;
   public static final int SEPARADOR = 15;
   public static final int COMA = 7;
   public static final int LOWER = 17;
@@ -32,7 +33,7 @@ public class sym {
   public static final int CEROMAS = 11;
   public static final int LOPPER = 19;
   public static final int ASCII = 20;
-  public static final int SALTO = 26;
+  public static final int SALTO = 27;
   public static final int ENTERO = 16;
   public static final int RANGO = 5;
   public static final int PTCOMA = 6;
@@ -62,6 +63,7 @@ public class sym {
   "IDENTIFICADOR",
   "ALFA",
   "COMILLADOBLE",
+  "DIAG",
   "CONJUNTO",
   "SALTO",
   "CARACTER"

@@ -44,7 +44,7 @@ parser code
 
 terminal String DPUNTO, ASI, GNAR, RANGO, PTCOMA, COMA, LLAIZQ, LLADER;
 terminal String CONCAT, CEROMAS, UNOMAS, CERUNO, DISYUNCION, SEPARADOR;
-terminal String ENTERO, LOWER, UPPER, LOPPER, ASCII, LEXEM,IDENTIFICADOR, ALFA, COMILLADOBLE;
+terminal String ENTERO, LOWER, UPPER, LOPPER, ASCII, LEXEM,IDENTIFICADOR, ALFA, COMILLADOBLE, DIAG;
 terminal String CONJUNTO, SALTO, CARACTER;
 
 non terminal ini;
@@ -122,6 +122,7 @@ hoja::=
     ALFA:a          {:RESULT = new nodo(a, contador++, "conjunto");:}
    |CARACTER:a      {:RESULT = new nodo(a, contador++, "caracter");:}
    |SALTO:a         {:RESULT = new nodo(a, contador++, "especial");:}
+   |DIAG:a          {:RESULT = new nodo(a, contador++, "especial");:}
 ;
 
 listaLexemas::=

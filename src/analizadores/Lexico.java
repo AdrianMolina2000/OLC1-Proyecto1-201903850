@@ -246,40 +246,50 @@ public class Lexico implements java_cup.runtime.Scanner {
 		/* 28 */ YY_NO_ANCHOR,
 		/* 29 */ YY_NO_ANCHOR,
 		/* 30 */ YY_NO_ANCHOR,
-		/* 31 */ YY_NOT_ACCEPT,
-		/* 32 */ YY_NO_ANCHOR,
+		/* 31 */ YY_NO_ANCHOR,
+		/* 32 */ YY_NOT_ACCEPT,
 		/* 33 */ YY_NO_ANCHOR,
-		/* 34 */ YY_NOT_ACCEPT,
-		/* 35 */ YY_NO_ANCHOR,
-		/* 36 */ YY_NOT_ACCEPT,
+		/* 34 */ YY_NO_ANCHOR,
+		/* 35 */ YY_NOT_ACCEPT,
+		/* 36 */ YY_NO_ANCHOR,
 		/* 37 */ YY_NO_ANCHOR,
 		/* 38 */ YY_NOT_ACCEPT,
 		/* 39 */ YY_NO_ANCHOR,
 		/* 40 */ YY_NOT_ACCEPT,
 		/* 41 */ YY_NO_ANCHOR,
 		/* 42 */ YY_NOT_ACCEPT,
-		/* 43 */ YY_NOT_ACCEPT,
-		/* 44 */ YY_NO_ANCHOR,
+		/* 43 */ YY_NO_ANCHOR,
+		/* 44 */ YY_NOT_ACCEPT,
 		/* 45 */ YY_NOT_ACCEPT,
-		/* 46 */ YY_NO_ANCHOR
+		/* 46 */ YY_NO_ANCHOR,
+		/* 47 */ YY_NOT_ACCEPT,
+		/* 48 */ YY_NO_ANCHOR,
+		/* 49 */ YY_NO_ANCHOR,
+		/* 50 */ YY_NO_ANCHOR,
+		/* 51 */ YY_NO_ANCHOR,
+		/* 52 */ YY_NO_ANCHOR,
+		/* 53 */ YY_NO_ANCHOR,
+		/* 54 */ YY_NO_ANCHOR
 	};
 	private int yy_cmap[] = unpackFromString(1,65538,
-"6:9,7,3,6:2,8,6:18,7,2,30,29:2,31,29:4,21,23,17,14,20,5,25:10,13,16,1,29,4," +
-"24,29,27:2,9,27:6,12,27:3,11,10,27:11,29,32,29:2,28,29,26:13,33,26:12,18,22" +
-",19,15,6:65409,0:2")[0];
+"6:9,7,3,6:2,8,6:18,7,2,37,36:2,38,36:4,21,23,17,14,20,5,32:10,13,16,1,36,4," +
+"24,36,34:2,9,34:6,12,34:3,11,10,34:11,36,39,36:2,35,36,27,33:2,25,33:2,28,3" +
+"3,26,33:2,31,33,30,29,33:11,18,22,19,15,6:65409,0:2")[0];
 
-	private int yy_rmap[] = unpackFromString(1,47,
-"0,1,2,1:3,3,4,1:5,5,1:7,6,7,6,1:5,6,1,8,1,9,10,11,12,13,14,15,16,17,18,19,2" +
-"0,19,6")[0];
+	private int yy_rmap[] = unpackFromString(1,55,
+"0,1,2,1:3,3,4,1:5,5,1:6,6,1,7,8,1:5,8,1,8,9,1,10,11,12,13,14,15,16,17,18,19" +
+",20,21,22,21,23,8,24,25,26,27,8")[0];
 
-	private int yy_nxt[][] = unpackFromString(21,34,
-"1,2,32,3,4,35,5,6:2,7,46:3,8,9,10,11,12,13,14,15,16,17,18,19,20,21,46,32:2," +
-"37,39,41,21,-1:36,31,-1:38,6:2,-1:34,23,44,23:2,-1:12,23:4,-1:4,23,-1:9,34:" +
-"4,-1:13,34:2,-1:5,34,-1:9,23:4,-1:12,23:4,-1:4,23,-1,22:2,-1,22:4,-1,22:25," +
-"-1,45,38,45,40,45:29,-1:9,23:3,29,-1:12,23:4,-1:4,23,-1:9,34:4,-1:6,27,-1:5" +
-",34:4,-1:4,34,-1:5,22,-1:29,42:29,24,42:3,-1,36:29,24,36:3,-1,31:3,28,31:29" +
-",-1:31,25,-1:6,31,-1:62,26,-1,42:29,30,42:3,-1,45,38,45,43,45:29,-1:9,23:2," +
-"33,23,-1:12,23:4,-1:4,23");
+	private int yy_nxt[][] = unpackFromString(28,40,
+"1,2,33,3,4,36,5,6:2,7,49:3,8,9,10,11,12,13,14,15,16,17,18,19,20,54:6,21,54," +
+"49,33:2,39,41,43,-1:42,32,-1:44,6:2,-1:40,23,46,23:2,-1:12,23:11,-1:13,35:4" +
+",-1:12,35:7,-1,35:2,-1:14,23:4,-1:12,23,53,23:9,-1:5,22:2,-1,22:4,-1,22:31," +
+"-1:9,23:4,-1:12,23:11,-1:5,47,40,47,42,47:35,-1:9,23:3,29,-1:12,23:11,-1:13" +
+",35:4,-1:6,27,-1:5,35:11,-1:9,22,-1:43,23:4,-1:12,23:6,31,23:4,-1:5,44:36,2" +
+"4,44:2,-1,38:36,24,38:2,-1,32:3,28,32:35,-1:38,25,-1:5,32,-1:65,26,-1:10,44" +
+":36,30,44:2,-1,47,40,47,45,47:35,-1:9,23:2,34,23,-1:12,23:11,-1:13,23:4,-1:" +
+"12,23:2,37,23:8,-1:13,23:4,-1:12,23:5,48,23:5,-1:13,23:4,-1:12,23:4,50,23:6" +
+",-1:13,23:4,-1:12,23:3,51,23:7,-1:13,23:4,-1:12,23:2,52,23:8,-1:4");
 
 	public java_cup.runtime.Symbol next_token ()
 		throws java.io.IOException {
@@ -405,11 +415,11 @@ public class Lexico implements java_cup.runtime.Scanner {
 					case -20:
 						break;
 					case 20:
-						{return new Symbol(sym.ENTERO,yyline,yychar, yytext());}
+						{return new Symbol(sym.LOWER,yyline,yychar, yytext());}
 					case -21:
 						break;
 					case 21:
-						{return new Symbol(sym.LOWER,yyline,yychar, yytext());}
+						{return new Symbol(sym.ENTERO,yyline,yychar, yytext());}
 					case -22:
 						break;
 					case 22:
@@ -449,37 +459,69 @@ public class Lexico implements java_cup.runtime.Scanner {
 						{return new Symbol(sym.LEXEM,yyline,yychar, yytext());}
 					case -31:
 						break;
-					case 32:
-						{return new Symbol(sym.ASCII,yyline,yychar, yytext());}
+					case 31:
+						{return new Symbol(sym.DIAG,yyline,yychar, yytext());}
 					case -32:
 						break;
 					case 33:
-						{return new Symbol(sym.IDENTIFICADOR,yyline,yychar, yytext());}
+						{return new Symbol(sym.ASCII,yyline,yychar, yytext());}
 					case -33:
 						break;
-					case 35:
-						{return new Symbol(sym.ASCII,yyline,yychar, yytext());}
+					case 34:
+						{return new Symbol(sym.IDENTIFICADOR,yyline,yychar, yytext());}
 					case -34:
 						break;
-					case 37:
+					case 36:
 						{return new Symbol(sym.ASCII,yyline,yychar, yytext());}
 					case -35:
 						break;
-					case 39:
-						{return new Symbol(sym.ASCII,yyline,yychar, yytext());}
+					case 37:
+						{return new Symbol(sym.IDENTIFICADOR,yyline,yychar, yytext());}
 					case -36:
 						break;
-					case 41:
+					case 39:
 						{return new Symbol(sym.ASCII,yyline,yychar, yytext());}
 					case -37:
 						break;
-					case 44:
-						{return new Symbol(sym.IDENTIFICADOR,yyline,yychar, yytext());}
+					case 41:
+						{return new Symbol(sym.ASCII,yyline,yychar, yytext());}
 					case -38:
 						break;
-					case 46:
-						{return new Symbol(sym.UPPER,yyline,yychar, yytext());}
+					case 43:
+						{return new Symbol(sym.ASCII,yyline,yychar, yytext());}
 					case -39:
+						break;
+					case 46:
+						{return new Symbol(sym.IDENTIFICADOR,yyline,yychar, yytext());}
+					case -40:
+						break;
+					case 48:
+						{return new Symbol(sym.IDENTIFICADOR,yyline,yychar, yytext());}
+					case -41:
+						break;
+					case 49:
+						{return new Symbol(sym.UPPER,yyline,yychar, yytext());}
+					case -42:
+						break;
+					case 50:
+						{return new Symbol(sym.IDENTIFICADOR,yyline,yychar, yytext());}
+					case -43:
+						break;
+					case 51:
+						{return new Symbol(sym.IDENTIFICADOR,yyline,yychar, yytext());}
+					case -44:
+						break;
+					case 52:
+						{return new Symbol(sym.IDENTIFICADOR,yyline,yychar, yytext());}
+					case -45:
+						break;
+					case 53:
+						{return new Symbol(sym.IDENTIFICADOR,yyline,yychar, yytext());}
+					case -46:
+						break;
+					case 54:
+						{return new Symbol(sym.LOWER,yyline,yychar, yytext());}
+					case -47:
 						break;
 					default:
 						yy_error(YY_E_INTERNAL,false);
