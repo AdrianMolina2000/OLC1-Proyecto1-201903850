@@ -293,7 +293,7 @@ public class ast {
 
     private void graficarTabla(String path) {
         File imagenes = new File("Imagenes");
-        File siguientes = new File("Imagenes/Siguientes");
+        File siguientes = new File("Imagenes/Siguientes_201903850");
         if (!imagenes.exists()) {
             if (imagenes.mkdirs()) {
                 System.out.println("Directorio creado");
@@ -311,7 +311,7 @@ public class ast {
         PrintWriter escritor;
 
         try {
-            fichero = new FileWriter("Imagenes/Siguientes/" + nombre + ".dot");
+            fichero = new FileWriter("Imagenes/Siguientes_201903850/" + nombre + ".dot");
             escritor = new PrintWriter(fichero);
             escritor.print(getCodigoTabla());
         } catch (Exception e) {
@@ -328,7 +328,7 @@ public class ast {
 
         try {
             Runtime rt = Runtime.getRuntime();
-            rt.exec("dot -Tjpg -o " + "Imagenes/Siguientes/" + path + " Imagenes/Siguientes/" + nombre + ".dot");
+            rt.exec("dot -Tjpg -o " + "Imagenes/Siguientes_201903850/" + path + " Imagenes/Siguientes_201903850/" + nombre + ".dot");
             //Esperamos medio segundo para dar tiempo a que la imagen se genere.
             //Para que no sucedan errores en caso de que se decidan graficar varios
             //árboles sucesivamente.
@@ -377,7 +377,7 @@ public class ast {
 
     private void graficarTablaTrans(String path) {
         File imagenes = new File("Imagenes");
-        File transicion = new File("Imagenes/Transicion");
+        File transicion = new File("Imagenes/Transicion_201903850");
         if (!imagenes.exists()) {
             if (imagenes.mkdirs()) {
                 System.out.println("Directorio creado");
@@ -394,7 +394,7 @@ public class ast {
         FileWriter fichero = null;
         PrintWriter escritor;
         try {
-            fichero = new FileWriter("Imagenes/Transicion/" + nombre + ".dot");
+            fichero = new FileWriter("Imagenes/Transicion_201903850/" + nombre + ".dot");
             escritor = new PrintWriter(fichero);
             escritor.print(getCodigoTablaTrans());
         } catch (Exception e) {
@@ -410,7 +410,7 @@ public class ast {
         }
         try {
             Runtime rt = Runtime.getRuntime();
-            rt.exec("dot -Tjpg -o " + "Imagenes/Transicion/" + path + " Imagenes/Transicion/" + nombre + ".dot");
+            rt.exec("dot -Tjpg -o " + "Imagenes/Transicion_201903850/" + path + " Imagenes/Transicion_201903850/" + nombre + ".dot");
             //Esperamos medio segundo para dar tiempo a que la imagen se genere.
             //Para que no sucedan errores en caso de que se decidan graficar varios
             //árboles sucesivamente.
@@ -468,7 +468,7 @@ public class ast {
 
     private void graficarAFD(String path) {
         File imagenes = new File("Imagenes");
-        File transicion = new File("Imagenes/AFD");
+        File transicion = new File("Imagenes/AFD_201903850");
         if (!imagenes.exists()) {
             if (imagenes.mkdirs()) {
                 System.out.println("Directorio creado");
@@ -485,7 +485,7 @@ public class ast {
         FileWriter fichero = null;
         PrintWriter escritor;
         try {
-            fichero = new FileWriter("Imagenes/AFD/" + nombre + ".dot");
+            fichero = new FileWriter("Imagenes/AFD_201903850/" + nombre + ".dot");
             escritor = new PrintWriter(fichero);
             escritor.print(getCodigoAFD());
         } catch (Exception e) {
@@ -501,7 +501,7 @@ public class ast {
         }
         try {
             Runtime rt = Runtime.getRuntime();
-            rt.exec("dot -Tjpg -o " + "Imagenes/AFD/" + path + " Imagenes/AFD/" + nombre + ".dot");
+            rt.exec("dot -Tjpg -o " + "Imagenes/AFD_201903850/" + path + " Imagenes/AFD_201903850/" + nombre + ".dot");
             //Esperamos medio segundo para dar tiempo a que la imagen se genere.
             //Para que no sucedan errores en caso de que se decidan graficar varios
             //árboles sucesivamente.

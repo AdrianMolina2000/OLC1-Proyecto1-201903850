@@ -36,7 +36,7 @@ public class nodo {
 
     public void graficarArbolAST(String path, String n) {
         File imagenes = new File("Imagenes");
-        File arbol = new File("Imagenes/Arbol");
+        File arbol = new File("Imagenes/Arbol_201903850");
         if (!imagenes.exists()) {
             if (!imagenes.mkdirs()) {
                 System.out.println("Error al crear directorio");
@@ -51,7 +51,7 @@ public class nodo {
         FileWriter fichero = null;
         PrintWriter escritor;
         try {
-            fichero = new FileWriter("Imagenes/Arbol/" + n + ".dot");
+            fichero = new FileWriter("Imagenes/Arbol_201903850/" + n + ".dot");
             escritor = new PrintWriter(fichero);
             escritor.print(CuerpoGraphvizAST());
         } catch (Exception e) {
@@ -67,7 +67,7 @@ public class nodo {
         }
         try {
             Runtime rt = Runtime.getRuntime();
-            rt.exec("dot -Tjpg -o " + "Imagenes/Arbol/" + path + " Imagenes/Arbol/" + n + ".dot");
+            rt.exec("dot -Tjpg -o " + "Imagenes/Arbol_201903850/" + path + " Imagenes/Arbol_201903850/" + n + ".dot");
             //Esperamos medio segundo para dar tiempo a que la imagen se genere.
             //Para que no sucedan errores en caso de que se decidan graficar varios
             //árboles sucesivamente.

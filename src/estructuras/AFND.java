@@ -122,7 +122,7 @@ public class AFND {
 
     public void graficarAFND(String path, LinkedList lista) {
         File imagenes = new File("Imagenes");
-        File transicion = new File("Imagenes/AFND");
+        File transicion = new File("Imagenes/AFND_201903850");
         if (!imagenes.exists()) {
             if (imagenes.mkdirs()) {
                 System.out.println("Directorio creado");
@@ -139,7 +139,7 @@ public class AFND {
         FileWriter fichero = null;
         PrintWriter escritor;
         try {
-            fichero = new FileWriter("Imagenes/AFND/" + path + ".dot");
+            fichero = new FileWriter("Imagenes/AFND_201903850/" + path + ".dot");
             escritor = new PrintWriter(fichero);
             escritor.print(getCodigoAFND(lista));
         } catch (Exception e) {
@@ -155,7 +155,7 @@ public class AFND {
         }
         try {
             Runtime rt = Runtime.getRuntime();
-            rt.exec("dot -Tjpg -o " + "Imagenes/AFND/" + path + " Imagenes/AFND/" + path + ".dot");
+            rt.exec("dot -Tjpg -o " + "Imagenes/AFND_201903850/" + path + " Imagenes/AFND_201903850/" + path + ".dot");
             //Esperamos medio segundo para dar tiempo a que la imagen se genere.
             //Para que no sucedan errores en caso de que se decidan graficar varios
             //árboles sucesivamente.
