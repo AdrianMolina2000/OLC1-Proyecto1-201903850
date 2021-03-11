@@ -5,7 +5,9 @@
  */
 package Interfaz;
 
+import estructuras.AFND;
 import estructuras.ast;
+import estructuras.nodoAFN;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -48,6 +50,9 @@ public class Principal extends javax.swing.JFrame {
                 arbolito.arbol.graficarArbolAST(arbolito.nombre + ".jpg", arbolito.nombre);
                 arbolito.getTabla();
                 arbolito.transiciones();
+                AFND afn = new AFND();
+                LinkedList<nodoAFN> lista = afn.recursivoAFND(arbolito.arbol);
+                afn.graficarAFND(arbolito.nombre + ".jpg", lista);
             }
         } catch (Exception ex) {
             System.out.println("Error fatal en compilación de entrada.");

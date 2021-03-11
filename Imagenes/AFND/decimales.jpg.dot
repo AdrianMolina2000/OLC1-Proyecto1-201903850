@@ -1,0 +1,13 @@
+digraph grafica{
+rankdir=LR;
+node [shape =circle, style=filled, fillcolor=seashell2];
+0->1 [label ="ε"];
+1->2 [label ="{digito}"];
+2->1 [label ="ε"];
+2->3 [label ="ε"];
+3->4 [label ="."];
+4->5 [label ="ε"];
+5->6 [label ="{digito}"];
+6->5 [label ="ε"];
+6->7 [label ="ε"];
+}
